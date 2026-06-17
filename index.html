@@ -223,7 +223,37 @@
     .figure svg{max-width:100%;}
     .block-label{margin:24px 0 10px;}
   }
+  /* Fallback for in-app / file viewers that ignore the mobile viewport meta:
+     force the stacked (mobile) layout based on the REAL device width. */
+  html.is-narrow .shell{grid-template-columns:1fr;}
+  html.is-narrow .sidebar{position:fixed;left:0;top:0;width:280px;z-index:50;transform:translateX(-100%);transition:.25s;box-shadow:0 0 40px rgba(0,0,0,.3);}
+  html.is-narrow .sidebar.open{transform:none;}
+  html.is-narrow .topbar .menu-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--line);background:var(--panel);border-radius:9px;cursor:pointer;font-size:18px;}
+  html.is-narrow .wrap,html.is-narrow .topbar{padding-left:20px;padding-right:20px;}
+  html.is-narrow .fgrid{grid-template-columns:1fr;}
+  html.is-narrow .scrim{position:fixed;inset:0;background:rgba(20,18,40,.5);z-index:40;display:none;}
+  html.is-narrow .scrim.open{display:block;}
+  html.is-xnarrow .wrap,html.is-xnarrow .topbar{padding-left:16px;padding-right:16px;}
+  html.is-xnarrow section{padding:34px 0;}
+  html.is-xnarrow .hero{padding:38px 0 24px;}
+  html.is-xnarrow .q,html.is-xnarrow .fcard{padding:15px 16px;}
+  html.is-xnarrow .sechead h3{font-size:21px;}
 </style>
+<script>
+(function(){
+  function setNarrow(){
+    var iw = window.innerWidth || 9999;
+    var sw = (window.screen && screen.width) || 9999;
+    var w = Math.min(iw, sw);            // trust whichever is smaller (real device)
+    var h = document.documentElement;
+    h.classList.toggle('is-narrow', w <= 860);
+    h.classList.toggle('is-xnarrow', w <= 480);
+  }
+  setNarrow();
+  window.addEventListener('resize', setNarrow);
+  window.addEventListener('orientationchange', setNarrow);
+})();
+</script>
 </head>
 <body>
 <div class="shell">
