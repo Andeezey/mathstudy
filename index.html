@@ -30,15 +30,15 @@
   html{scroll-behavior:smooth;}
   body{
     margin:0;font-family:"Inter",system-ui,sans-serif;color:var(--ink);
-    background:linear-gradient(180deg,#f5f8fd 0%, #eaf0fa 100%);background-attachment:fixed;
-    line-height:1.55;-webkit-font-smoothing:antialiased;
+    background:linear-gradient(180deg,#f5f8fd 0%, #eaf0fa 100%);
+    line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh;min-height:100dvh;
   }
   .mono{font-family:"JetBrains Mono",monospace;}
 
   /* ---------- Layout ---------- */
-  .shell{display:grid;grid-template-columns:268px 1fr;min-height:100vh;}
+  .shell{display:grid;grid-template-columns:268px 1fr;min-height:100vh;min-height:100dvh;}
   .sidebar{
-    position:sticky;top:0;height:100vh;overflow-y:auto;background:#ffffff;
+    position:sticky;top:0;height:100vh;height:100dvh;overflow-y:auto;background:#ffffff;
     color:var(--ink);padding:26px 18px 40px;border-right:1px solid var(--line);
   }
   .brand{display:flex;flex-direction:column;gap:2px;margin-bottom:22px;}
@@ -74,7 +74,7 @@
 
   main{padding:0 0 90px;min-width:0;}
   .topbar{
-    position:sticky;top:0;z-index:20;background:rgba(244,247,253,.85);backdrop-filter:blur(8px);
+    position:sticky;top:0;z-index:20;background:rgba(244,247,253,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);padding:13px 40px;display:flex;align-items:center;gap:16px;
   }
   .topbar .tt{font-family:"Space Grotesk";font-weight:600;font-size:14px;letter-spacing:-.01em;}
