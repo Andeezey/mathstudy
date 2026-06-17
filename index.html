@@ -72,7 +72,7 @@
     font-size:11.5px;padding:7px;border-radius:9px;cursor:pointer;font-family:inherit;transition:.15s;}
   .resetbtn:hover{background:var(--violet-wash);color:var(--violet-deep);border-color:#c2d3f4;}
 
-  main{padding:0 0 90px;}
+  main{padding:0 0 90px;min-width:0;}
   .topbar{
     position:sticky;top:0;z-index:20;background:rgba(244,247,253,.85);backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);padding:13px 40px;display:flex;align-items:center;gap:16px;
@@ -111,7 +111,7 @@
     padding:16px 18px;box-shadow:var(--shadow);margin-bottom:12px;}
   .fcard h4{margin:0 0 4px;font-size:14.5px;font-family:"Space Grotesk";font-weight:600;}
   .fcard .eq{font-family:"JetBrains Mono";font-size:14.5px;background:var(--violet-wash);color:var(--violet-deep);
-    display:inline-block;padding:5px 11px;border-radius:8px;margin:3px 0 7px;font-weight:500;}
+    display:inline-block;padding:5px 11px;border-radius:8px;margin:3px 0 7px;font-weight:500;max-width:100%;overflow-wrap:anywhere;}
   .fcard p{margin:0;font-size:13.5px;color:var(--ink-soft);}
   .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 
@@ -121,11 +121,23 @@
   .worked .wtitle{font-family:"Space Grotesk";font-weight:600;font-size:15px;margin:0 0 4px;}
   .worked .prob{font-size:14px;color:var(--ink-soft);margin:0 0 14px;font-style:italic;}
   .steps{counter-reset:s;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;}
-  .steps li{counter-increment:s;display:flex;gap:11px;font-size:13.8px;}
+  .steps li{counter-increment:s;display:flex;gap:11px;font-size:13.8px;min-width:0;overflow-wrap:anywhere;}
   .steps li::before{content:counter(s);font-family:"JetBrains Mono";font-weight:700;font-size:11px;
     background:var(--amber);color:#fff;width:20px;height:20px;border-radius:6px;display:grid;place-items:center;flex:none;margin-top:1px;}
   .steps .ans{background:var(--emerald-wash);color:var(--emerald);font-weight:600;padding:8px 12px;border-radius:8px;margin-top:5px;font-family:"JetBrains Mono";font-size:13.5px;}
-  .mq{font-family:"JetBrains Mono";background:#eef2fa;padding:1px 5px;border-radius:4px;font-size:.92em;}
+  .mq{font-family:"JetBrains Mono";background:#eef2fa;padding:1px 5px;border-radius:4px;font-size:.92em;overflow-wrap:anywhere;}
+
+  /* figures / diagrams */
+  .figure{margin:13px 0 2px;background:#fbfcff;border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;justify-content:center;}
+  .figure svg{width:100%;max-width:300px;height:auto;}
+  .figure svg .ax{stroke:#aab2c2;stroke-width:1.3;fill:none;}
+  .figure svg .ed{stroke:#5a6478;stroke-width:1.8;fill:none;}
+  .figure svg .cv{stroke:var(--violet);stroke-width:2.4;fill:none;}
+  .figure svg .dl{stroke:#7c8499;stroke-width:1.4;stroke-dasharray:4 3;fill:none;}
+  .figure svg .sh{fill:#eaf1fd;stroke:var(--violet);stroke-width:1.6;}
+  .figure svg .dot{fill:var(--violet);}
+  .figure svg text{font:11px "Inter",sans-serif;fill:#3a4253;}
+  .figure svg .lab{font-weight:600;fill:var(--ink);}
 
   /* practice question */
   .q{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
@@ -135,7 +147,7 @@
   .qtag{font-family:"JetBrains Mono";font-size:11px;font-weight:700;color:#fff;background:var(--violet);
     padding:3px 8px;border-radius:6px;flex:none;margin-top:1px;}
   .q.solved .qtag{background:var(--emerald);}
-  .qprompt{font-size:14.5px;font-weight:500;margin:0;}
+  .qprompt{font-size:14.5px;font-weight:500;margin:0;overflow-wrap:anywhere;}
   .qprompt .mq{font-weight:400;}
   .hintline{font-size:12.5px;color:var(--muted);margin:9px 0 0;}
 
@@ -148,10 +160,16 @@
     padding:10px 20px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap;}
   .checkbtn:hover{background:var(--violet-deep);}
   .checkbtn:active{transform:translateY(1px);}
+  .regenrow{margin-top:11px;}
+  .regenbtn{background:#fff;border:1px dashed #c2cee6;color:var(--violet-deep);font-family:inherit;
+    font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:9px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;transition:.15s;}
+  .regenbtn:hover{background:var(--violet-wash);border-style:solid;border-color:var(--violet);}
+  .regenbtn:active{transform:translateY(1px);}
 
   .choices{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
   .choice{display:flex;align-items:center;gap:11px;border:1.5px solid var(--line);border-radius:10px;
-    padding:10px 14px;cursor:pointer;font-size:14px;transition:.13s;background:#f7f9fd;}
+    padding:10px 14px;cursor:pointer;font-size:14px;transition:.13s;background:#f7f9fd;min-width:0;overflow-wrap:anywhere;}
   .choice:hover{border-color:var(--violet);background:#fff;}
   .choice input{accent-color:var(--violet);width:16px;height:16px;flex:none;}
   .choice .lbl{font-family:"JetBrains Mono";font-weight:700;color:var(--muted);font-size:12px;}
@@ -159,7 +177,7 @@
   .choice.correct{border-color:var(--emerald);background:var(--emerald-wash);}
   .choice.wrong{border-color:var(--rose);background:var(--rose-wash);}
 
-  .feedback{margin-top:13px;border-radius:10px;padding:12px 15px;font-size:13.6px;display:none;}
+  .feedback{margin-top:13px;border-radius:10px;padding:12px 15px;font-size:13.6px;display:none;overflow-wrap:anywhere;}
   .feedback.show{display:block;animation:pop .25s ease;}
   @keyframes pop{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
   .feedback.ok{background:var(--emerald-wash);color:#0b5e4d;border:1px solid #b6e3d6;}
@@ -188,6 +206,22 @@
     .fgrid{grid-template-columns:1fr;}
     .scrim{position:fixed;inset:0;background:rgba(20,18,40,.5);z-index:40;display:none;}
     .scrim.open{display:block;}
+  }
+
+  @media (max-width:480px){
+    .wrap,.topbar{padding-left:16px;padding-right:16px;}
+    section{padding:34px 0;}
+    .hero{padding:38px 0 24px;}
+    .sechead h3{font-size:21px;}
+    .sechead{gap:10px;}
+    .q,.fcard{padding:15px 16px;}
+    .worked{padding:16px 16px;}
+    .qprompt{font-size:14px;}
+    .answerrow input[type=text]{min-width:0;width:100%;}
+    .checkbtn{flex:1;}
+    .figure{padding:8px;}
+    .figure svg{max-width:100%;}
+    .block-label{margin:24px 0 10px;}
   }
 </style>
 </head>
@@ -325,6 +359,7 @@ const UNITS = [
     ["Find a","substitute a known point","After locating the vertex or roots, plug in one more point to solve for a."]
   ],
   worked:{
+    fig:"parabola",
     title:"Worked example — one graph, three forms",
     prob:"A parabola has vertex (4, −2) and passes through (0, 6). Write vertex, factored, and standard form.",
     steps:[
@@ -348,11 +383,11 @@ const UNITS = [
       choices:["½x² − 4x + 6","½x² − 8x + 12","x² − 4x + 6","½x² + 4x − 6"], correct:0,
       hint:"Multiply the binomials first, then distribute the ½.",
       solution:'(x−6)(x−2)=x²−8x+12, then ½(x²−8x+12) = <span class="mq">½x² − 4x + 6</span>.'},
-    {type:"text", tag:"Q4", prompt:'<b>Evel Knievel jump.</b> Take-off and landing ramps are 6 ft tall, 30 ft apart, and the peak is 15 ft high at the center (vertex at x = 15, y = 15). Using <span class="mq">f(x)=a(x−15)²+15</span> with the take-off point (0, 6), find <b>a</b>.',
+    {type:"text", tag:"Q4", fig:"ramp", prompt:'<b>Evel Knievel jump.</b> Take-off and landing ramps are 6 ft tall, 30 ft apart, and the peak is 15 ft high at the center (vertex at x = 15, y = 15). Using <span class="mq">f(x)=a(x−15)²+15</span> with the take-off point (0, 6), find <b>a</b>.',
       accept:["-0.04","-1/25"], num:-0.04, tol:0.002,
       hint:"Plug the take-off point (0, 6) into the vertex form and solve for a.",
       solution:'6 = a(0−15)²+15 → 6 = 225a + 15 → −9 = 225a → <span class="mq">a = −0.04</span>.'},
-    {type:"text", tag:"Q5", prompt:'Using <span class="mq">y = −0.04(x − 15)² + 15</span>, how high (ft) is Evel when he is 5 ft to the right of the take-off (x = 5)?',
+    {type:"text", tag:"Q5", fig:"ramp5", prompt:'Using <span class="mq">y = −0.04(x − 15)² + 15</span>, how high (ft) is Evel when he is 5 ft to the right of the take-off (x = 5)?',
       accept:["11","11ft"], num:11, tol:0.01,
       hint:"Substitute x = 5 and simplify.",
       solution:'y = −0.04(5−15)²+15 = −0.04(100)+15 = −4 + 15 = <span class="mq">11 ft</span>.'}
@@ -416,7 +451,7 @@ const UNITS = [
     ]
   },
   questions:[
-    {type:"choice", tag:"Q1", prompt:'Which parent function is <span class="mq">y = 1/x</span>?',
+    {type:"choice", tag:"Q1", fig:"recip", prompt:'Which parent function is <span class="mq">y = 1/x</span>?',
       choices:["Absolute value","Reciprocal (rational)","Cube root","Exponential"], correct:1,
       hint:"It has two branches and asymptotes at the axes.",
       solution:'y = 1/x is the <b>reciprocal / rational</b> parent, with a vertical and horizontal asymptote.'},
@@ -432,7 +467,7 @@ const UNITS = [
       choices:["[−1, 2]","[−1, 0) ∪ (0, 2]","(−1, 0] ∪ [0, 2)","[−1, 0] ∪ [0, 2]"], correct:1,
       hint:"Open circle at 0 → exclude 0 with parentheses. Filled endpoints get brackets.",
       solution:'Include −1 and 2 (brackets), exclude 0 (open circle): <span class="mq">[−1, 0) ∪ (0, 2]</span>.'},
-    {type:"choice", tag:"Q5", prompt:'End behavior of a standard <b>cube root</b> graph (y = ∛x):',
+    {type:"choice", tag:"Q5", fig:"cbrt", prompt:'End behavior of a standard <b>cube root</b> graph (y = ∛x):',
       choices:["As x→∞, y→∞ ; as x→−∞, y→−∞","As x→∞, y→∞ ; as x→−∞, y→∞","As x→∞, y→0 ; as x→−∞, y→0","As x→∞, y→−∞ ; as x→−∞, y→∞"], correct:0,
       hint:"Cube root rises forever in both directions, like an odd function.",
       solution:'∛x increases without bound both ways: <b>x→∞ ⇒ y→∞</b> and <b>x→−∞ ⇒ y→−∞</b>.'}
@@ -525,6 +560,7 @@ const UNITS = [
     ["Cone surface area","SA = πr² + πrℓ , ℓ = √(r²+h²)","\u201cTotal\u201d includes the circular base."]
   ],
   worked:{
+    fig:"similar",
     title:"Worked example — similar triangles",
     prob:"In right △ABC, D is on AB and E is on CB with DE ∥ AC. AB = 15, BC = 12, EC = 7. Find BD.",
     steps:[
@@ -535,15 +571,15 @@ const UNITS = [
     ]
   },
   questions:[
-    {type:"text", tag:"Q1", prompt:'A right triangle has legs <span class="mq">PQ = 5</span> and <span class="mq">QR = 12</span> (hypotenuse 13). Find the altitude <span class="mq">QS</span> to the hypotenuse (exact).',
+    {type:"text", tag:"Q1", fig:"altitude", prompt:'A right triangle has legs <span class="mq">PQ = 5</span> and <span class="mq">QR = 12</span> (hypotenuse 13). Find the altitude <span class="mq">QS</span> to the hypotenuse (exact).',
       accept:["60/13"], num:4.615, tol:0.02,
       hint:"Altitude to hypotenuse = (leg·leg)/hypotenuse.",
       solution:'QS = (5·12)/13 = <span class="mq">60/13</span> ≈ 4.62.'},
-    {type:"text", tag:"Q2", prompt:'From the worked example (AB=15, BC=12, EC=7, DE ∥ AC), find <span class="mq">BD</span>.',
+    {type:"text", tag:"Q2", fig:"similar", prompt:'From the worked example (AB=15, BC=12, EC=7, DE ∥ AC), find <span class="mq">BD</span>.',
       accept:["25/4","75/12","6.25"], num:6.25, tol:0.02,
       hint:"BE = 5, then BD/15 = 5/12.",
       solution:'BD = (15·5)/12 = 75/12 = <span class="mq">25/4 = 6.25</span>.'},
-    {type:"text", tag:"Q3", prompt:'A cone is 4 in tall with volume <span class="mq">12π in³</span>. Find its total surface area in terms of π. (Type like <span class="mq">24pi</span>.)',
+    {type:"text", tag:"Q3", fig:"cone", prompt:'A cone is 4 in tall with volume <span class="mq">12π in³</span>. Find its total surface area in terms of π. (Type like <span class="mq">24pi</span>.)',
       accept:["24π"],
       hint:"Use V to get r (r=3), find slant ℓ=5, then SA = πr² + πrℓ.",
       solution:'12π = ⅓πr²(4) → r² = 9 → r = 3. ℓ = √(3²+4²) = 5. SA = π(9) + π(3)(5) = 9π + 15π = <span class="mq">24π</span>.'},
@@ -551,7 +587,7 @@ const UNITS = [
       accept:["9√3"], num:15.588, tol:0.05,
       hint:"Side = 6. Area = (√3/4)s².",
       solution:'s = 18/3 = 6. A = (√3/4)(36) = <span class="mq">9√3 cm²</span>.'},
-    {type:"text", tag:"Q5", prompt:'Right △ABC has legs <span class="mq">AB = 4</span>, <span class="mq">BC = 8</span>. A square shares the right-angle corner with sides on the legs. Find the square\'s <b>area</b> (exact fraction).',
+    {type:"text", tag:"Q5", fig:"square", prompt:'Right △ABC has legs <span class="mq">AB = 4</span>, <span class="mq">BC = 8</span>. A square shares the right-angle corner with sides on the legs. Find the square\'s <b>area</b> (exact fraction).',
       accept:["64/9"], num:7.111, tol:0.03,
       hint:"Square side s = (leg·leg)/(leg+leg). Then area = s².",
       solution:'s = (4·8)/(4+8) = 32/12 = 8/3. Area = (8/3)² = <span class="mq">64/9</span>.'},
@@ -569,6 +605,7 @@ const UNITS = [
     ["Find an angle","θ = tan⁻¹(opp/adj), etc.","Two sides known, angle unknown → inverse trig."]
   ],
   worked:{
+    fig:"rt56",
     title:"Worked example — six ratios from two legs",
     prob:"A right triangle has legs 5 and 6, with θ opposite the leg of length 5. Write all six exact ratios.",
     steps:[
@@ -578,29 +615,256 @@ const UNITS = [
     ]
   },
   questions:[
-    {type:"text", tag:"Q1", prompt:'Right triangle with legs 5 and 6. Find the <b>hypotenuse</b> (exact). (Type like <span class="mq">sqrt61</span>.)',
+    {type:"text", tag:"Q1", fig:"rt56", prompt:'Right triangle with legs 5 and 6. Find the <b>hypotenuse</b> (exact). (Type like <span class="mq">sqrt61</span>.)',
       accept:["√61"], num:7.81, tol:0.03,
       hint:"Pythagorean theorem: 5² + 6².",
       solution:'√(25 + 36) = <span class="mq">√61</span> ≈ 7.81.'},
-    {type:"text", tag:"Q2", prompt:'For that triangle, with θ opposite the leg of 5, find <span class="mq">tan θ</span> (exact).',
+    {type:"text", tag:"Q2", fig:"rt56", prompt:'For that triangle, with θ opposite the leg of 5, find <span class="mq">tan θ</span> (exact).',
       accept:["5/6"], num:0.8333, tol:0.01,
       hint:"tan = opposite / adjacent.",
       solution:'tan θ = opp/adj = <span class="mq">5/6</span>.'},
-    {type:"text", tag:"Q3", prompt:'θ is acute with <span class="mq">sec θ = 13/4</span>. Find the missing (opposite) side in standard radical form. (Type like <span class="mq">3sqrt17</span>.)',
+    {type:"text", tag:"Q3", fig:"sec13", prompt:'θ is acute with <span class="mq">sec θ = 13/4</span>. Find the missing (opposite) side in standard radical form. (Type like <span class="mq">3sqrt17</span>.)',
       accept:["3√17","√153"], num:12.369, tol:0.05,
       hint:"sec = hyp/adj → hyp 13, adj 4. Use Pythagoras for the opposite side.",
       solution:'opp = √(13² − 4²) = √(169 − 16) = √153 = <span class="mq">3√17</span>.'},
-    {type:"text", tag:"Q4", prompt:'A cone\'s base circumference is <span class="mq">10π cm</span> and its volume is <span class="mq">75π cm³</span>. Find the angle between the slant height and the central axis (degrees, ≈ to 2 dp).',
+    {type:"text", tag:"Q4", fig:"cone", prompt:'A cone\'s base circumference is <span class="mq">10π cm</span> and its volume is <span class="mq">75π cm³</span>. Find the angle between the slant height and the central axis (degrees, ≈ to 2 dp).',
       accept:["29.05","29.06"], num:29.05, tol:0.25,
       hint:"Circumference → r = 5. Volume → h = 9. The angle θ at the apex: tan θ = r/h.",
       solution:'2πr = 10π → r = 5. 75π = ⅓π(25)h → h = 9. θ = tan⁻¹(5/9) ≈ <span class="mq">29.05°</span>.'},
-    {type:"text", tag:"Q5", prompt:'A right triangle has its right angle at B and acute angle <span class="mq">C = 22°</span>. Find <span class="mq">m∠A</span> (degrees).',
+    {type:"text", tag:"Q5", fig:"rtangle", prompt:'A right triangle has its right angle at B and acute angle <span class="mq">C = 22°</span>. Find <span class="mq">m∠A</span> (degrees).',
       accept:["68","68°"], num:68, tol:0.5,
       hint:"The two acute angles of a right triangle add to 90°.",
       solution:'90 − 22 = <span class="mq">68°</span>.'}
   ]
 }
 ];
+
+/* =========================================================
+   FIGURES — accurate inline SVG diagrams (self-contained)
+   ========================================================= */
+const FIGS = {
+  parabola:`<svg viewBox="0 0 270 165" role="img" aria-label="Parabola, vertex (4,-2), through (0,6)">
+    <line class="ax" x1="30" y1="20" x2="30" y2="150"/><line class="ax" x1="30" y1="111" x2="258" y2="111"/>
+    <text x="20" y="24">y</text><text x="259" y="123">x</text>
+    <polyline class="cv" points="43.75,57.4 57.5,78.5 85,111 112.5,130.5 140,137 167.5,130.5 195,111 222.5,78.5 236.25,57.4"/>
+    <circle class="dot" cx="140" cy="137" r="3.5"/><text class="lab" x="112" y="153">(4, −2)</text>
+    <circle class="dot" cx="30" cy="33" r="3.5"/><text class="lab" x="36" y="31">(0, 6)</text></svg>`,
+  ramp:`<svg viewBox="0 0 300 165" role="img" aria-label="Two ramps 30 ft apart, 6 ft tall, jump peak 15 ft">
+    <line class="ax" x1="18" y1="140" x2="292" y2="140"/>
+    <polygon class="sh" points="15,140 40,140 40,96"/><polygon class="sh" points="260,96 260,140 285,140"/>
+    <path class="dl" d="M40,96 Q150,-36 260,96"/>
+    <line class="dl" x1="40" y1="96" x2="40" y2="140"/><line class="dl" x1="260" y1="96" x2="260" y2="140"/>
+    <text x="44" y="120">6 ft</text><text x="232" y="120">6 ft</text>
+    <text class="lab" x="136" y="156">30 ft</text><text class="lab" x="118" y="26">peak 15 ft</text>
+    <circle class="dot" cx="40" cy="96" r="3"/></svg>`,
+  ramp5:`<svg viewBox="0 0 300 165" role="img" aria-label="Jump height at 5 ft from take-off">
+    <line class="ax" x1="18" y1="140" x2="292" y2="140"/>
+    <polygon class="sh" points="15,140 40,140 40,96"/><polygon class="sh" points="260,96 260,140 285,140"/>
+    <path class="dl" d="M40,96 Q150,-36 260,96"/>
+    <line class="dl" x1="40" y1="96" x2="40" y2="140"/><line class="dl" x1="260" y1="96" x2="260" y2="140"/>
+    <line class="dl" x1="76.7" y1="140" x2="76.7" y2="59.3"/>
+    <circle class="dot" cx="76.7" cy="59.3" r="3.5"/><text class="lab" x="80" y="56">?</text>
+    <text class="lab" x="60" y="156">5 ft</text><text class="lab" x="118" y="26">peak 15 ft</text></svg>`,
+  cone:`<svg viewBox="0 0 210 172" role="img" aria-label="Cone with radius r, height h, slant l">
+    <ellipse class="ed" cx="100" cy="138" rx="62" ry="14"/>
+    <path class="ed" d="M100,22 L38,138"/><path class="ed" d="M100,22 L162,138"/>
+    <line class="dl" x1="100" y1="22" x2="100" y2="138"/><line class="dl" x1="100" y1="138" x2="162" y2="138"/>
+    <text class="lab" x="104" y="92">h</text><text class="lab" x="128" y="133">r</text><text class="lab" x="136" y="84">ℓ</text></svg>`,
+  rt56:`<svg viewBox="0 0 210 150" role="img" aria-label="Right triangle, legs 5 and 6, hypotenuse root 61">
+    <polygon class="ed" points="40,120 40,40 175,120"/>
+    <rect class="ax" x="40" y="108" width="12" height="12"/>
+    <text class="lab" x="22" y="84">5</text><text class="lab" x="100" y="135">6</text>
+    <text class="lab" x="106" y="73">√61</text><text class="lab" x="156" y="115">θ</text></svg>`,
+  altitude:`<svg viewBox="0 0 230 150" role="img" aria-label="Right triangle 5-12-13 with altitude to hypotenuse">
+    <polygon class="ed" points="30,120 55,60 200,120"/><line class="dl" x1="55" y1="60" x2="55" y2="120"/>
+    <rect class="ax" x="55" y="108" width="12" height="12"/>
+    <text class="lab" x="28" y="88">5</text><text class="lab" x="128" y="82">12</text>
+    <text class="lab" x="108" y="135">13</text><text class="lab" x="60" y="96">?</text>
+    <text x="20" y="124">P</text><text x="48" y="55">Q</text><text x="203" y="124">R</text><text x="46" y="134">S</text></svg>`,
+  similar:`<svg viewBox="0 0 235 165" role="img" aria-label="Right triangle ABC with DE parallel to AC">
+    <polygon class="ed" points="40,17 40,130 190,130"/><line class="cv" x1="127.5" y1="83" x2="127.5" y2="130"/>
+    <rect class="ax" x="40" y="118" width="12" height="12"/>
+    <text x="33" y="14">A</text><text x="29" y="128">C</text><text x="193" y="134">B</text>
+    <text x="116" y="80">D</text><text x="123" y="144">E</text>
+    <text class="lab" x="25" y="78">9</text><text class="lab" x="120" y="66">15</text>
+    <text class="lab" x="74" y="144">7</text><text class="lab" x="150" y="144">12</text></svg>`,
+  square:`<svg viewBox="0 0 220 150" role="img" aria-label="Right triangle legs 4 and 8 with inscribed square">
+    <polygon class="ed" points="40,40 40,120 200,120"/><rect class="sh" x="40" y="67" width="53" height="53"/>
+    <text class="lab" x="24" y="84">4</text><text class="lab" x="120" y="135">8</text><text class="lab" x="60" y="98">s</text>
+    <text x="30" y="40">A</text><text x="30" y="132">B</text><text x="203" y="132">C</text></svg>`,
+  sec13:`<svg viewBox="0 0 205 150" role="img" aria-label="Right triangle, sec theta = 13 over 4">
+    <polygon class="ed" points="40,30 40,120 165,120"/><rect class="ax" x="40" y="108" width="12" height="12"/>
+    <text class="lab" x="18" y="78">3√17</text><text class="lab" x="95" y="135">4</text>
+    <text class="lab" x="100" y="68">13</text><text class="lab" x="148" y="115">θ</text></svg>`,
+  rtangle:`<svg viewBox="0 0 205 150" role="img" aria-label="Right triangle, angle C is 22 degrees">
+    <polygon class="ed" points="40,50 40,120 180,120"/><rect class="ax" x="40" y="108" width="12" height="12"/>
+    <path class="cv" d="M158,120 A22,22 0 0 0 160,110"/>
+    <text class="lab" x="148" y="114">22°</text><text class="lab" x="46" y="64">?</text>
+    <text x="30" y="50">A</text><text x="30" y="132">B</text><text x="183" y="132">C</text></svg>`,
+  recip:`<svg viewBox="0 0 200 200" role="img" aria-label="Graph of y = 1 over x">
+    <line class="ax" x1="100" y1="20" x2="100" y2="180"/><line class="ax" x1="20" y1="100" x2="180" y2="100"/>
+    <text x="104" y="28">y</text><text x="172" y="114">x</text>
+    <polyline class="cv" points="107,55 113,74 118,82 136,91 154,94 176,96"/>
+    <polyline class="cv" points="93,145 87,126 82,118 64,109 46,106 24,104"/></svg>`,
+  cbrt:`<svg viewBox="0 0 200 160" role="img" aria-label="Graph of y = cube root of x">
+    <line class="ax" x1="100" y1="15" x2="100" y2="150"/><line class="ax" x1="20" y1="80" x2="180" y2="80"/>
+    <text x="104" y="23">y</text><text x="172" y="94">x</text>
+    <polyline class="cv" points="30,126 65,117 91,103 100,80 109,57 135,43 170,34"/></svg>`
+};
+
+/* =========================================================
+   PROBLEM GENERATORS — fresh numbers on demand (seeded)
+   ========================================================= */
+function rngFrom(seed){ let a=seed>>>0; return function(){ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+const ri=(r,a,b)=>a+Math.floor(r()*(b-a+1));
+const pk=(r,a)=>a[Math.floor(r()*a.length)];
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){const t=a%b;a=b;b=t;}return a||1;}
+function rfrac(n,d){const s=((n<0)!==(d<0))?-1:1;n=Math.abs(n);d=Math.abs(d);const g=gcd(n,d);return (s<0?'-':'')+(n/g)+'/'+(d/g);}
+const lead=a=>a===1?'':(a===-1?'−':String(a));
+const vfH=v=>v>=0?`(x − ${v})`:`(x + ${-v})`;
+const pmK=v=>v>=0?`+ ${v}`:`− ${-v}`;
+const term=(c,suf)=>c===0?'':(c>0?` + ${c}${suf}`:` − ${-c}${suf}`);
+function mc(r,correct,ds){const seen=new Set([correct]);const u=[];for(const d of ds){if(d&&!seen.has(d)){seen.add(d);u.push(d);}}while(u.length<3)u.push(correct+' ·');const arr=[correct,...u.slice(0,3)];for(let i=arr.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return {choices:arr,correct:arr.indexOf(correct)};}
+
+/* figure builders */
+function fbRamp(tall,dist,peak,markX){
+  const ty=140-(tall/peak)*110, yc=60-ty;
+  let m='';
+  if(markX!=null){const hx=peak-(peak-tall)*Math.pow((markX-dist/2)/(dist/2),2);
+    const mx=40+(markX/dist)*220, my=140-(hx/peak)*110;
+    m=`<line class="dl" x1="${mx.toFixed(1)}" y1="140" x2="${mx.toFixed(1)}" y2="${my.toFixed(1)}"/><circle class="dot" cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="3.5"/><text class="lab" x="${(mx+4).toFixed(1)}" y="${(my-3).toFixed(1)}">?</text><text class="lab" x="${(mx-14).toFixed(1)}" y="156">${markX} ft</text>`;}
+  return `<svg viewBox="0 0 300 165" role="img" aria-label="ramp jump diagram"><line class="ax" x1="18" y1="140" x2="292" y2="140"/><polygon class="sh" points="15,140 40,140 40,${ty.toFixed(1)}"/><polygon class="sh" points="260,${ty.toFixed(1)} 260,140 285,140"/><path class="dl" d="M40,${ty.toFixed(1)} Q150,${yc.toFixed(1)} 260,${ty.toFixed(1)}"/><line class="dl" x1="40" y1="${ty.toFixed(1)}" x2="40" y2="140"/><line class="dl" x1="260" y1="${ty.toFixed(1)}" x2="260" y2="140"/><text x="44" y="${((ty+140)/2).toFixed(1)}">${tall} ft</text><text x="232" y="${((ty+140)/2).toFixed(1)}">${tall} ft</text><text class="lab" x="132" y="156">${dist} ft</text><text class="lab" x="110" y="26">peak ${peak} ft</text>${m}</svg>`;
+}
+function fbAlt(a,b,c){return `<svg viewBox="0 0 230 150" role="img" aria-label="altitude triangle"><polygon class="ed" points="30,120 55,60 200,120"/><line class="dl" x1="55" y1="60" x2="55" y2="120"/><rect class="ax" x="55" y="108" width="12" height="12"/><text class="lab" x="26" y="88">${a}</text><text class="lab" x="128" y="82">${b}</text><text class="lab" x="106" y="135">${c}</text><text class="lab" x="60" y="96">?</text><text x="20" y="124">P</text><text x="48" y="55">Q</text><text x="203" y="124">R</text><text x="46" y="134">S</text></svg>`;}
+function fbSim(AB,BC,EC){return `<svg viewBox="0 0 235 165" role="img" aria-label="similar triangles"><polygon class="ed" points="40,17 40,130 190,130"/><line class="cv" x1="127.5" y1="83" x2="127.5" y2="130"/><rect class="ax" x="40" y="118" width="12" height="12"/><text x="33" y="14">A</text><text x="29" y="128">C</text><text x="193" y="134">B</text><text x="116" y="80">D</text><text x="123" y="144">E</text><text class="lab" x="118" y="64">${AB}</text><text class="lab" x="70" y="144">${EC}</text><text class="lab" x="150" y="144">${BC}</text></svg>`;}
+function fbCone(r,h){return `<svg viewBox="0 0 210 172" role="img" aria-label="cone"><ellipse class="ed" cx="100" cy="138" rx="62" ry="14"/><path class="ed" d="M100,22 L38,138"/><path class="ed" d="M100,22 L162,138"/><line class="dl" x1="100" y1="22" x2="100" y2="138"/><line class="dl" x1="100" y1="138" x2="162" y2="138"/><text class="lab" x="104" y="92">${h}</text><text class="lab" x="126" y="133">${r}</text><text class="lab" x="136" y="84">ℓ</text></svg>`;}
+function fbSquare(a,b){return `<svg viewBox="0 0 220 150" role="img" aria-label="square in triangle"><polygon class="ed" points="40,40 40,120 200,120"/><rect class="sh" x="40" y="67" width="53" height="53"/><text class="lab" x="24" y="84">${a}</text><text class="lab" x="118" y="135">${b}</text><text class="lab" x="60" y="98">s</text><text x="30" y="40">A</text><text x="30" y="132">B</text><text x="203" y="132">C</text></svg>`;}
+function fbRt(left,bot,hyp,theta){return `<svg viewBox="0 0 210 150" role="img" aria-label="right triangle"><polygon class="ed" points="40,120 40,40 175,120"/><rect class="ax" x="40" y="108" width="12" height="12"/><text class="lab" x="18" y="84">${left}</text><text class="lab" x="98" y="135">${bot}</text><text class="lab" x="100" y="73">${hyp}</text>${theta?'<text class="lab" x="156" y="115">θ</text>':''}</svg>`;}
+function fbRtAng(c){return `<svg viewBox="0 0 205 150" role="img" aria-label="right triangle angle"><polygon class="ed" points="40,50 40,120 180,120"/><rect class="ax" x="40" y="108" width="12" height="12"/><path class="cv" d="M158,120 A22,22 0 0 0 160,110"/><text class="lab" x="146" y="114">${c}°</text><text class="lab" x="46" y="64">?</text><text x="30" y="50">A</text><text x="30" y="132">B</text><text x="183" y="132">C</text></svg>`;}
+
+const GEN = {
+  // ---- Unit 1 ----
+  'u1_0':(r)=>{const a=pk(r,[1,2,3]);let h=ri(r,-4,5);if(h===0)h=2;let k=ri(r,-5,5);if(k===0)k=-2;
+    const correct=`${lead(a)}${vfH(h)}² ${pmK(k)}`;
+    const m=mc(r,correct,[`${lead(a)}${vfH(-h)}² ${pmK(k)}`,`${lead(a)}${vfH(h)}² ${pmK(-k)}`,`${lead(a)}${vfH(-h)}² ${pmK(-k)}`,`${lead(a+1)}${vfH(h)}² ${pmK(k)}`,`${lead(a)}${vfH(k)}² ${pmK(h)}`]);
+    return {type:'choice',prompt:`A parabola has vertex <span class="mq">(${h}, ${k})</span> and a point giving <span class="mq">a = ${a}</span>. Which is correct vertex form?`,choices:m.choices,correct:m.correct,hint:'Vertex (h, k) → a(x − h)² + k. Watch the signs.',solution:`Vertex (${h}, ${k}) → ${vfH(h)}² and ${pmK(k)}, with a = ${a}: <span class="mq">${correct}</span>.`,_test:m.choices[m.correct]};},
+  'u1_1':(r)=>{const a=pk(r,[1,2,3]);let p=ri(r,-4,5),q=ri(r,-4,6);if(p===0)p=2;if(q===0)q=3;if(q===p)q=(p>=0?p+1:p-1);if(q===0)q=4;
+    const f=v=>v>=0?`(x − ${v})`:`(x + ${-v})`;const correct=`${lead(a)}${f(p)}${f(q)}`;
+    const m=mc(r,correct,[`${lead(a)}${f(-p)}${f(-q)}`,`${lead(a)}${f(p)}${f(-q)}`,`${lead(a)}${f(-p)}${f(q)}`,`${lead(a+1)}${f(p)}${f(q)}`]);
+    return {type:'choice',prompt:`A parabola has x-intercepts at <span class="mq">x = ${p}</span> and <span class="mq">x = ${q}</span> with <span class="mq">a = ${a}</span>. Factored form?`,choices:m.choices,correct:m.correct,hint:'Each root r → factor (x − r).',solution:`Roots ${p}, ${q} → ${f(p)}${f(q)}, times a = ${a}: <span class="mq">${correct}</span>.`,_test:m.choices[m.correct]};},
+  'u1_2':(r)=>{const a=pk(r,[1,2]);const p=ri(r,1,6),q=ri(r,1,6);const b=-a*(p+q),c=a*p*q;
+    const correct=`${lead(a)}x²${term(b,'x')}${term(c,'')}`;
+    const m=mc(r,correct,[`${lead(a)}x²${term(-b,'x')}${term(c,'')}`,`${lead(a)}x²${term(b,'x')}${term(-c,'')}`,`${lead(a+1)}x²${term(b,'x')}${term(c,'')}`]);
+    return {type:'choice',prompt:`Expand <span class="mq">${lead(a)}(x − ${p})(x − ${q})</span> into standard form.`,choices:m.choices,correct:m.correct,hint:'Multiply the binomials, then distribute a.',solution:`(x − ${p})(x − ${q}) = x²${term(-(p+q),'x')}${term(p*q,'')}, times ${a===1?'1':a}: <span class="mq">${correct}</span>.`,_test:m.choices[m.correct]};},
+  'u1_3':(r)=>{const tall=pk(r,[4,5,6,8]);const peak=tall+pk(r,[6,8,9,10,12]);const dist=pk(r,[20,24,30,40]);
+    const a=(tall-peak)/Math.pow(dist/2,2);const aR=Math.round(a*1000)/1000;
+    return {type:'text',prompt:`<b>Motorcycle jump.</b> Ramps are ${tall} ft tall, ${dist} ft apart, peak ${peak} ft at the center (vertex x = ${dist/2}, y = ${peak}). Using <span class="mq">f(x)=a(x−${dist/2})²+${peak}</span> with take-off (0, ${tall}), find <b>a</b> (3 dp).`,hint:`Plug (0, ${tall}) into the vertex form and solve for a.`,solution:`${tall} = a(0−${dist/2})² + ${peak} → ${tall-peak} = ${(dist/2)*(dist/2)}a → a = <span class="mq">${aR}</span>.`,num:a,tol:0.0015,accept:[String(aR)],figHtml:fbRamp(tall,dist,peak,null),_test:String(aR)};},
+  'u1_4':(r)=>{const tall=pk(r,[4,5,6]);const peak=tall+pk(r,[6,9,10,12]);const dist=pk(r,[20,30,40]);
+    const a=(tall-peak)/Math.pow(dist/2,2);const x=pk(r,[5,10,dist/2,dist/2+5]).valueOf();const xv=Math.min(x,dist-1);
+    const h=a*Math.pow(xv-dist/2,2)+peak;const hR=Math.round(h*100)/100;
+    return {type:'text',prompt:`Using <span class="mq">y = ${Math.round(a*1000)/1000}(x − ${dist/2})² + ${peak}</span>, how high (ft) is the jump at x = ${xv}? (2 dp)`,hint:`Substitute x = ${xv} and simplify.`,solution:`y = ${Math.round(a*1000)/1000}(${xv} − ${dist/2})² + ${peak} = <span class="mq">${hR} ft</span>.`,num:h,tol:0.06,accept:[String(hR)],figHtml:fbRamp(tall,dist,peak,xv),_test:String(hR)};},
+  // ---- Unit 2 ----
+  'u2_0':(r)=>{const n=ri(r,4,12);const sq=n*n;const correct=`(x − ${n})(x + ${n})`;
+    const m=mc(r,correct,[`(x − ${n})²`,`(x + ${n})²`,'prime']);
+    return {type:'choice',prompt:`Factor completely: <span class="mq">x² − ${sq}</span>.`,choices:m.choices,correct:m.correct,hint:'Difference of squares — two perfect squares with a minus.',solution:`${sq} = ${n}², so x² − ${sq} = <span class="mq">(x − ${n})(x + ${n})</span>.`,_test:m.choices[m.correct]};},
+  'u2_1':(r)=>{let m1=ri(r,-6,6),n1=ri(r,-6,6);if(m1===0)m1=2;if(n1===0)n1=3;const b=m1+n1,c=m1*n1;
+    const f=v=>v>=0?`(x + ${v})`:`(x − ${-v})`;const correct=`${f(m1)}${f(n1)}`;
+    const m=mc(r,correct,[`${f(-m1)}${f(-n1)}`,`${f(m1)}${f(-n1)}`,`${f(m1+1)}${f(n1)}`]);
+    return {type:'choice',prompt:`Factor: <span class="mq">x²${term(b,'x')}${term(c,'')}</span>.`,choices:m.choices,correct:m.correct,hint:`Two numbers that multiply to ${c} and add to ${b}.`,solution:`${m1} and ${n1} multiply to ${c}, add to ${b} → <span class="mq">${correct}</span>.`,_test:m.choices[m.correct]};},
+  'u2_2':(r)=>{const a=pk(r,[2,3]);const s=pk(r,[1,-1,2,-2,5,-5,7,-7]);let t=ri(r,-5,5);if(t===0)t=1;const b=a*t+s,c=s*t;
+    const sf=v=>v>=0?`(${a}x + ${v})`:`(${a}x − ${-v})`;const tf=v=>v>=0?`(x + ${v})`:`(x − ${-v})`;const correct=`${sf(s)}${tf(t)}`;
+    const m=mc(r,correct,[`${sf(-s)}${tf(-t)}`,`${sf(s)}${tf(-t)}`,`${tf(s)}${sf(t)}`]);
+    return {type:'choice',prompt:`Factor: <span class="mq">${a}x²${term(b,'x')}${term(c,'')}</span>.`,choices:m.choices,correct:m.correct,hint:`a·c = ${a*c}. Split the middle term, then group.`,solution:`Splitting the middle term and grouping gives <span class="mq">${correct}</span>.`,_test:m.choices[m.correct]};},
+  'u2_3':(r)=>{const mm=pk(r,[1,4,9]);const k=pk(r,[2,3,4]);const n=k*k;const b=mm-n,c=-mm*n;
+    const correct=`(x² + ${mm})(x − ${k})(x + ${k})`;
+    const m=mc(r,correct,[`(x² + ${mm})(x² − ${n})`,`(x² − ${mm})(x² + ${n})`,`(x − ${k})(x + ${k})`]);
+    return {type:'choice',prompt:`Factor completely: <span class="mq">x⁴${term(b,'x²')}${term(c,'')}</span>.`,choices:m.choices,correct:m.correct,hint:'Treat as a quadratic in x², factor, then keep factoring any difference of squares.',solution:`(x² + ${mm})(x² − ${n}); then x² − ${n} = (x − ${k})(x + ${k}) → <span class="mq">${correct}</span>.`,_test:m.choices[m.correct]};},
+  'u2_4':(r)=>{const c=pk(r,[2,3]);const correct=`${c}x(x²y − 3x³y² + 5y⁵ − 11)`;
+    const m=mc(r,correct,[`${c}(x³y − 3x⁴y² + 5xy⁵ − 11x)`,`x(${c}x²y − ${c*3}x³y² + ${c*5}y⁵ − ${c*11})`,`${c}xy(x² − 3x³y + 5y⁴ − 11)`]);
+    return {type:'choice',prompt:`Factor out the GCF: <span class="mq">${c}x³y − ${c*3}x⁴y² + ${c*5}xy⁵ − ${c*11}x</span>.`,choices:m.choices,correct:m.correct,hint:'What is common to every term? Each has a factor of '+c+' and an x.',solution:`Every term shares ${c}x → <span class="mq">${correct}</span>. (The last term has no y.)`,_test:m.choices[m.correct]};},
+  // ---- Unit 3 ----
+  'u3_0':(r)=>{const bank=[['y = 1/x','Reciprocal (rational)','recip'],['y = √x','Square root',''],['y = |x|','Absolute value',''],['y = x³','Cubic',''],['y = 2ˣ','Exponential',''],['y = ∛x','Cube root','cbrt'],['y = int(x)','Greatest integer (step)','']];
+    const names=['Reciprocal (rational)','Square root','Absolute value','Cubic','Exponential','Cube root','Greatest integer (step)'];
+    const e=pk(r,bank);const m=mc(r,e[1],names.filter(n=>n!==e[1]));
+    return {type:'choice',prompt:`Which parent function is <span class="mq">${e[0]}</span>?`,choices:m.choices,correct:m.correct,hint:'Picture its graph and its key feature.',solution:`<span class="mq">${e[0]}</span> is the <b>${e[1]}</b> parent.`,figHtml:e[2]?FIGS[e[2]]:'',_test:m.choices[m.correct]};},
+  'u3_1':(r)=>{let h=ri(r,-4,4);if(h===0)h=2;const refl=pk(r,[true,false]);
+    const dir=h>=0?`right ${h}`:`left ${-h}`;const correct=`${refl?'Reflect over x-axis, ':''}${dir.charAt(0).toUpperCase()+dir.slice(1)}`;
+    const wrongDir=h>=0?`left ${h}`:`right ${-h}`;
+    const m=mc(r,correct,[`${refl?'Reflect over x-axis, ':''}${wrongDir.charAt(0).toUpperCase()+wrongDir.slice(1)}`,`${refl?'Reflect over y-axis, ':'Reflect over x-axis, '}${dir.charAt(0).toUpperCase()+dir.slice(1)}`,`Up ${Math.abs(h)}, reflect over x-axis`]);
+    return {type:'choice',prompt:`Describe the transformations of <span class="mq">${refl?'−':''}(x ${h>=0?'− '+h:'+ '+(-h)})³</span> from the parent x³.`,choices:m.choices,correct:m.correct,hint:'(x − h) shifts horizontally; a leading negative flips vertically.',solution:`(x ${h>=0?'− '+h:'+ '+(-h)}) → ${dir}${refl?'; the negative reflects over the x-axis':''}. So <b>${correct}</b>.`,_test:m.choices[m.correct]};},
+  'u3_2':(r)=>{let p=ri(r,-4,4);if(p===0)p=2;let q=ri(r,-4,4);if(q===0)q=3;
+    const hor=p>0?`left ${p}`:`right ${-p}`;const ver=q>0?`down ${q}`:`up ${-q}`;
+    const correct=`${hor.charAt(0).toUpperCase()+hor.slice(1)}, ${ver}`;
+    const hor2=p>0?`right ${p}`:`left ${-p}`;const ver2=q>0?`up ${q}`:`down ${-q}`;
+    const m=mc(r,correct,[`${hor2.charAt(0).toUpperCase()+hor2.slice(1)}, ${ver}`,`${hor.charAt(0).toUpperCase()+hor.slice(1)}, ${ver2}`,`${hor2.charAt(0).toUpperCase()+hor2.slice(1)}, ${ver2}`]);
+    return {type:'choice',prompt:`For <span class="mq">y = ∛(x ${p>=0?'+ '+p:'− '+(-p)}) ${q>=0?'− '+q:'+ '+(-q)}</span>, the horizontal & vertical shifts are:`,choices:m.choices,correct:m.correct,hint:'(x + p) → left p. A constant subtracted outside → down.',solution:`Inside (x ${p>=0?'+ '+p:'− '+(-p)}) → ${hor}; outside ${q>=0?'− '+q:'+ '+(-q)} → ${ver}. <b>${correct}</b>.`,_test:m.choices[m.correct]};},
+  'u3_3':(r)=>{const mneg=ri(r,1,4),n=ri(r,1,4);const correct=`[−${mneg}, 0) ∪ (0, ${n}]`;
+    const m=mc(r,correct,[`[−${mneg}, ${n}]`,`(−${mneg}, 0] ∪ [0, ${n})`,`[−${mneg}, 0] ∪ [0, ${n}]`]);
+    return {type:'choice',prompt:`A graph runs from x = −${mneg} to x = ${n} (both included) with an <b>open circle at the origin</b>. Domain in interval notation:`,choices:m.choices,correct:m.correct,hint:'Open circle at 0 → exclude 0 with parentheses; included ends get brackets.',solution:`Include −${mneg} and ${n}, exclude 0: <span class="mq">${correct}</span>.`,_test:m.choices[m.correct]};},
+  'u3_4':(r)=>{const bank=[['cube root (y = ∛x)','As x→∞, y→∞ ; as x→−∞, y→−∞','cbrt'],['quadratic (y = x²)','As x→∞, y→∞ ; as x→−∞, y→∞',''],['negative cubic (y = −x³)','As x→∞, y→−∞ ; as x→−∞, y→∞',''],['exponential (y = 2ˣ)','As x→∞, y→∞ ; as x→−∞, y→0','']];
+    const e=pk(r,bank);const all=bank.map(b=>b[1]);const m=mc(r,e[1],all.filter(x=>x!==e[1]));
+    return {type:'choice',prompt:`End behavior of a standard <b>${e[0]}</b> graph:`,choices:m.choices,correct:m.correct,hint:'Picture the two tails of the graph.',solution:`For ${e[0]}: <b>${e[1]}</b>.`,figHtml:e[2]?FIGS[e[2]]:'',_test:m.choices[m.correct]};},
+  // ---- Unit 4 ----
+  'u4_0':(r)=>{const A=pk(r,[1,2,3]);let C=ri(r,-3,3);const B=ri(r,2,6);const con=B-C;
+    const correct=`${A===1?'−':'−'+A}x²${term(con,'')}`.replace('−1x²','−x²');const cc=`${(A===1?'−x²':'−'+A+'x²')}${term(con,'')}`;
+    const m=mc(r,cc,[`${A===1?'':A}x²${term(con,'')}`,`${A===1?'−x²':'−'+A+'x²'}${term(-con,'')}`,`${A===1?'−x²':'−'+A+'x²'}${term(B+C,'')}`]);
+    return {type:'choice',prompt:`With <span class="mq">j(x) = ${A===1?'':A}x²${term(C,'')}</span> and <span class="mq">k(x) = ${B} − x</span>, find <span class="mq">(k ∘ j)(x)</span>.`,choices:m.choices,correct:m.correct,hint:'k(j(x)) = '+B+' − (all of j).',solution:`k(j(x)) = ${B} − (${A===1?'':A}x²${term(C,'')}) = <span class="mq">${cc}</span>.`,_test:m.choices[m.correct]};},
+  'u4_1':(r)=>{const m1=pk(r,[2,3,4,6]),n=ri(r,1,5),p=ri(r,1,4);const con=m1*p-n;
+    const correct=`${m1}x³${term(con,'')}`;const m=mc(r,correct,[`${m1}x³${term(-con,'')}`,`(${m1}x − ${n})³`,`${m1}x³${term(m1*p+n,'')}`]);
+    return {type:'choice',prompt:`f(x) = ${m1}x − ${n} and g(x) = x³ + ${p}. Which equals <span class="mq">f(g(x))</span>?`,choices:m.choices,correct:m.correct,hint:'Substitute g into f, then simplify.',solution:`${m1}(x³ + ${p}) − ${n} = ${m1}x³ + ${m1*p} − ${n} = <span class="mq">${correct}</span>.`,_test:m.choices[m.correct]};},
+  'u4_2':(r)=>{const c=ri(r,2,9);const correct=`q(x)=√x , r(x)=x − ${c}`;
+    const m=mc(r,correct,[`q(x)=x − ${c} , r(x)=√x`,`q(x)=√(x) − ${c} , r(x)=x`,`q(x)=x² , r(x)=√x − ${c}`]);
+    return {type:'choice',prompt:`Decompose <span class="mq">m(x) = √(x − ${c})</span> so that m = q(r(x)):`,choices:m.choices,correct:m.correct,hint:'Outer (last) operation is the square root; inner is x − '+c+'.',solution:`Inner r(x) = x − ${c}, outer q(x) = √x → √(x − ${c}). ✓`,_test:m.choices[m.correct]};},
+  'u4_3':(r)=>{const A=pk(r,[2,3]),B=ri(r,1,5),C=ri(r,1,5);const correct=`f⁻¹(x) = ((x + ${C})/${A})² − ${B}`;
+    const m=mc(r,correct,[`f⁻¹(x) = ${A}√(x − ${B}) + ${C}`,`f⁻¹(x) = ((x − ${C})/${A})² + ${B}`,`f⁻¹(x) = (x + ${C})²/${A} − ${B}`]);
+    return {type:'choice',prompt:`Find the inverse of <span class="mq">f(x) = ${A}√(x + ${B}) − ${C}</span>.`,choices:m.choices,correct:m.correct,hint:'Swap x and y, isolate the radical, then square both sides.',solution:`Swap and solve: (x + ${C})/${A} = √(y + ${B}) → square → <span class="mq">${correct}</span>.`,_test:m.choices[m.correct]};},
+  'u4_4':(r)=>{const a=pk(r,[2,3]);const c=pk(r,[5,7,9,10,11]);const bound=rfrac(c,a);const correct=`(−∞, ${bound}]`;
+    const m=mc(r,correct,[`[${bound}, ∞)`,`(−∞, ${bound})`,`(−∞, ∞)`]);
+    return {type:'choice',prompt:`Domain of <span class="mq">g(x) = √(${c} − ${a}x)</span> in interval notation:`,choices:m.choices,correct:m.correct,hint:'Inside an even root must be ≥ 0. Solve '+c+' − '+a+'x ≥ 0.',solution:`${c} − ${a}x ≥ 0 → x ≤ ${bound} → <span class="mq">${correct}</span>.`,_test:m.choices[m.correct]};},
+  // ---- Unit 5 ----
+  'u5_0':(r)=>{const N=1000;const largePct=pk(r,[40,45,50,55,60]);const passPct=pk(r,[55,60,65,70]);
+    const large=N*largePct/100,small=N-large,pass=N*passPct/100;
+    const lo=Math.max(0,pass-large),hi=Math.min(small,pass);const smallPass=ri(r,lo,hi);const largePass=pass-smallPass;
+    const v=largePass/pass;
+    return {type:'text',prompt:`1000 dogs: ${largePct}% are large, ${passPct}% passed, and ${smallPass/10}% are small AND passed. Find <span class="mq">P(large | passed)</span> (fraction, decimal, or %).`,hint:'Large-and-passed ÷ total passed.',solution:`Large & passed = ${largePass}, total passed = ${pass} → <span class="mq">${largePass}/${pass}</span> = ${Math.round(v*1000)/10}%.`,num:v,tol:0.01,isPct:true,accept:[`${largePass}/${pass}`,rfrac(largePass,pass)],_test:`${largePass}/${pass}`};},
+  'u5_1':(r)=>{const tot=ri(r,24,32);const neither=ri(r,1,4);const atLeast=tot-neither;
+    const both=ri(r,2,Math.max(2,Math.floor(atLeast/2)));const cat=ri(r,both,atLeast);const dog=atLeast+both-cat;const v=both/tot;
+    return {type:'text',prompt:`In a class of ${tot}, ${cat} have a cat, ${dog} have a dog, and ${neither} have neither. Find <span class="mq">P(cat AND dog)</span>.`,hint:`${atLeast} have at least one. Use |C| + |D| − both = ${atLeast}.`,solution:`${cat} + ${dog} − both = ${atLeast} → both = ${both}. P = <span class="mq">${rfrac(both,tot)}</span>.`,num:v,tol:0.01,isPct:true,accept:[`${both}/${tot}`,rfrac(both,tot)],_test:`${both}/${tot}`};},
+  'u5_2':(r)=>{const pA=pk(r,[50,60,70]);const pB=pk(r,[10,20,30].filter(x=>x<100-pA));const pC=100-pA-pB;
+    const rA=pk(r,[10,20]),rB=pk(r,[20,30]),rC=pk(r,[30,40]);
+    const v=(pA*rA+pB*rB+pC*rC)/10000;
+    return {type:'text',prompt:`Machines A, B, C make ${pA}%, ${pB}%, ${pC}% of parts; defect rates ${rA}%, ${rB}%, ${rC}%. Find <span class="mq">P(defective)</span> as a decimal.`,hint:'Multiply each share by its defect rate, then add.',solution:`(${pA/100})(${rA/100})+(${pB/100})(${rB/100})+(${pC/100})(${rC/100}) = <span class="mq">${Math.round(v*10000)/10000}</span>.`,num:v,tol:0.004,accept:[String(Math.round(v*10000)/10000)],_test:String(Math.round(v*10000)/10000)};},
+  'u5_3':(r)=>{const pA=pk(r,[50,60,70]);const pB=pk(r,[10,20,30].filter(x=>x<100-pA));const pC=100-pA-pB;
+    const rA=pk(r,[10,20]),rB=pk(r,[20,30]),rC=pk(r,[30,40]);
+    const def=(pA*rA+pB*rB+pC*rC)/10000;const aDef=(pA*rA)/10000;const v=aDef/def;
+    return {type:'text',prompt:`Machines A, B, C make ${pA}%, ${pB}%, ${pC}% of parts; defect rates ${rA}%, ${rB}%, ${rC}%. Find <span class="mq">P(A | defective)</span> (2 dp).`,hint:'P(A and defective) ÷ P(defective).',solution:`${Math.round(aDef*10000)/10000} ÷ ${Math.round(def*10000)/10000} ≈ <span class="mq">${Math.round(v*100)/100}</span>.`,num:v,tol:0.015,accept:[String(Math.round(v*100)/100)],_test:String(Math.round(v*100)/100)};},
+  'u5_4':(r)=>{const s=ri(r,80,210),d=ri(r,90,470);const v=d/(s+d);
+    return {type:'text',prompt:`First class: ${s} survived, ${d} died (total ${s+d}). Find <span class="mq">P(died | first class)</span> as an unreduced fraction.`,hint:'Given first class, the denominator is the first-class total.',solution:`Died = ${d}, first-class total = ${s+d} → <span class="mq">${d}/${s+d}</span>.`,num:v,tol:0.01,accept:[`${d}/${s+d}`,rfrac(d,s+d)],_test:`${d}/${s+d}`};},
+  // ---- Unit 6 ----
+  'u6_0':(r)=>{const T=pk(r,[[3,4,5],[5,12,13],[6,8,10],[8,15,17],[7,24,25],[9,12,15],[20,21,29],[9,40,41]]);const[a,b,c]=T;const v=(a*b)/c;
+    return {type:'text',prompt:`A right triangle has legs <span class="mq">${a}</span> and <span class="mq">${b}</span> (hypotenuse ${c}). Find the altitude to the hypotenuse (exact).`,hint:'Altitude to hypotenuse = (leg · leg) / hypotenuse.',solution:`(${a}·${b})/${c} = <span class="mq">${rfrac(a*b,c)}</span> ≈ ${Math.round(v*100)/100}.`,num:v,tol:0.02,accept:[`${a*b}/${c}`,rfrac(a*b,c)],figHtml:fbAlt(a,b,c),_test:`${a*b}/${c}`};},
+  'u6_1':(r)=>{const BC=ri(r,8,16);const EC=ri(r,2,BC-2);const AB=ri(r,BC+2,26);const BE=BC-EC;const v=AB*BE/BC;
+    return {type:'text',prompt:`Right △ABC with D on AB, E on CB, DE ∥ AC. AB = ${AB}, BC = ${BC}, EC = ${EC}. Find <span class="mq">BD</span> (exact).`,hint:`BE = BC − EC = ${BE}, then BD/${AB} = ${BE}/${BC}.`,solution:`BD = (${AB}·${BE})/${BC} = <span class="mq">${rfrac(AB*BE,BC)}</span>.`,num:v,tol:0.02,accept:[`${AB*BE}/${BC}`,rfrac(AB*BE,BC),String(Math.round(v*1000)/1000)],figHtml:fbSim(AB,BC,EC),_test:`${AB*BE}/${BC}`};},
+  'u6_2':(r)=>{const T=pk(r,[[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15]]);const[rad,h,l]=T;const k=rad*rad+rad*l;
+    return {type:'text',prompt:`A cone has radius ${rad} and height ${h}. Find its total surface area in terms of π (type like <span class="mq">${k}pi</span>).`,hint:'Slant ℓ = √(r²+h²), then SA = πr² + πrℓ.',solution:`ℓ = √(${rad}²+${h}²) = ${l}. SA = π(${rad*rad}) + π(${rad})(${l}) = <span class="mq">${k}π</span>.`,accept:[`${k}π`],figHtml:fbCone(rad,h),_test:`${k}π`};},
+  'u6_3':(r)=>{const s=pk(r,[4,6,8,10,12]);const k=s*s/4;
+    return {type:'text',prompt:`An equilateral triangle has perimeter ${3*s} cm. Find its area, exact (type like <span class="mq">${k}sqrt3</span>).`,hint:`Side = ${s}. Area = (√3/4)s².`,solution:`s = ${3*s}/3 = ${s}. A = (√3/4)(${s*s}) = <span class="mq">${k}√3 cm²</span>.`,accept:[`${k}√3`],num:k*Math.sqrt(3),tol:0.05,figHtml:'',_test:`${k}√3`};},
+  'u6_4':(r)=>{const a=ri(r,3,9),b=ri(r,3,12);const num=a*b,den=a+b;const v=Math.pow(num/den,2);
+    return {type:'text',prompt:`Right △ABC has legs <span class="mq">AB = ${a}</span> and <span class="mq">BC = ${b}</span>. A square shares the right-angle corner with sides on the legs. Find the square's <b>area</b> (exact fraction).`,hint:'Side s = (leg·leg)/(leg+leg); area = s².',solution:`s = (${a}·${b})/(${a}+${b}) = ${rfrac(num,den)}. Area = s² = <span class="mq">${rfrac(num*num,den*den)}</span>.`,num:v,tol:0.03,accept:[`${num*num}/${den*den}`,rfrac(num*num,den*den)],figHtml:fbSquare(a,b),_test:`${num*num}/${den*den}`};},
+  'u6_5':(r)=>{const s=pk(r,[4,6,8]);const h=ri(r,5,12);const k=3*s*s*h/2;
+    return {type:'text',prompt:`A regular hexagonal prism has altitude ${h} cm and base edge ${s} cm. Find its <b>volume</b>, exact (type like <span class="mq">${k}sqrt3</span>).`,hint:'Hexagon area = (3√3/2)s², then × height.',solution:`Base = (3√3/2)(${s*s}) = ${3*s*s/2}√3. Volume = ${3*s*s/2}√3 · ${h} = <span class="mq">${k}√3 cm³</span>.`,accept:[`${k}√3`],num:k*Math.sqrt(3),tol:0.7,figHtml:'',_test:`${k}√3`};},
+  // ---- Unit 7 ----
+  'u7_0':(r)=>{const B=pk(r,[[5,6,'√61',7.81],[3,4,'5',5],[6,8,'10',10],[2,3,'√13',3.606],[4,7,'√65',8.062],[5,5,'5√2',7.071],[1,2,'√5',2.236],[6,6,'6√2',8.485],[9,12,'15',15],[5,12,'13',13]]);const[a,b,ex,val]=B;
+    return {type:'text',prompt:`Right triangle with legs ${a} and ${b}. Find the <b>hypotenuse</b> (exact — √ or decimal).`,hint:'Pythagorean theorem: '+a+'² + '+b+'².',solution:`√(${a*a} + ${b*b}) = √${a*a+b*b} = <span class="mq">${ex}</span> ≈ ${val}.`,num:val,tol:0.05,accept:[ex,`√${a*a+b*b}`],figHtml:fbRt(a,b,'?',false),_test:ex};},
+  'u7_1':(r)=>{const a=ri(r,2,9);let b=ri(r,2,9);const v=a/b;
+    return {type:'text',prompt:`A right triangle has legs ${a} and ${b}, with θ opposite the leg of length ${a}. Find <span class="mq">tan θ</span> (exact).`,hint:'tan = opposite / adjacent.',solution:`tan θ = ${a}/${b} = <span class="mq">${rfrac(a,b)}</span>.`,num:v,tol:0.01,accept:[`${a}/${b}`,rfrac(a,b)],figHtml:fbRt(a,b,'',true),_test:`${a}/${b}`};},
+  'u7_2':(r)=>{const B=pk(r,[[4,13,'3√17',12.369],[3,5,'4',4],[5,13,'12',12],[8,17,'15',15],[7,25,'24',24],[9,41,'40',40],[20,29,'21',21]]);const[adj,hyp,ex,val]=B;
+    return {type:'text',prompt:`θ is acute with <span class="mq">sec θ = ${hyp}/${adj}</span>. Find the opposite side in standard radical form.`,hint:'sec = hyp/adj → hyp '+hyp+', adj '+adj+'. Use Pythagoras for the opposite side.',solution:`opp = √(${hyp}² − ${adj}²) = √${hyp*hyp-adj*adj} = <span class="mq">${ex}</span>.`,num:val,tol:0.05,accept:[ex,`√${hyp*hyp-adj*adj}`],figHtml:fbRt(ex,String(adj),String(hyp),true),_test:ex};},
+  'u7_3':(r)=>{const rad=ri(r,3,9);const h=ri(r,4,12);const ang=Math.atan(rad/h)*180/Math.PI;const aR=Math.round(ang*100)/100;
+    return {type:'text',prompt:`A cone has radius ${rad} and height ${h}. Find the angle between the slant height and the central (vertical) axis (degrees, 2 dp).`,hint:'The apex angle θ satisfies tan θ = r / h.',solution:`θ = tan⁻¹(${rad}/${h}) ≈ <span class="mq">${aR}°</span>.`,num:ang,tol:0.2,accept:[String(aR)],figHtml:fbCone(rad,h),_test:String(aR)};},
+  'u7_4':(r)=>{const C=ri(r,15,75);const A=90-C;
+    return {type:'text',prompt:`A right triangle has its right angle at B and acute angle <span class="mq">C = ${C}°</span>. Find <span class="mq">m∠A</span> (degrees).`,hint:'The two acute angles of a right triangle add to 90°.',solution:`90 − ${C} = <span class="mq">${A}°</span>.`,num:A,tol:0.5,accept:[String(A),A+'°'],figHtml:fbRtAng(C),_test:String(A)};}
+};
 
 /* =========================================================
    ANSWER CHECKING
@@ -650,6 +914,8 @@ function isCorrect(q, raw){
 const STORE_KEY='m2final:v1';
 let solved={};               // {questionKey:true}
 let responses={};            // {questionKey:{t:'text',v} | {t:'choice',ci}}
+let seeds={};                // {questionKey:seed}  -> regenerates the exact instance
+let inst={};                 // {questionKey:currentInstance}
 let booting=false;
 const totalQ = UNITS.reduce((n,u)=>n+u.questions.length,0);
 
@@ -663,15 +929,15 @@ async function loadState(){
     else{ raw=localStorage.getItem(STORE_KEY); }
     if(raw){
       const d=JSON.parse(raw)||{};
-      if(d && (d.solved || d.responses)){ solved=d.solved||{}; responses=d.responses||{}; }
-      else { solved=d; responses={}; }   // legacy save (flat solved map)
+      if(d && (d.solved || d.responses || d.seeds)){ solved=d.solved||{}; responses=d.responses||{}; seeds=d.seeds||{}; }
+      else { solved=d; responses={}; seeds={}; }   // legacy save (flat solved map)
     }
-  }catch(e){ solved={}; responses={}; }
+  }catch(e){ solved={}; responses={}; seeds={}; }
 }
 async function saveState(){
   if(booting) return;
   try{
-    const v=JSON.stringify({solved, responses});
+    const v=JSON.stringify({solved, responses, seeds});
     if(hasClaudeStore){ await window.storage.set(STORE_KEY, v); }
     else{ localStorage.setItem(STORE_KEY, v); }
   }catch(e){ /* in-memory only */ }
@@ -695,46 +961,39 @@ function buildSteps(steps){
   }).join('');
 }
 
+function keyOf(u,i){return u.id+'_'+i;}
+function newSeed(){return (Math.random()*4294967296)>>>0;}
+function instanceFor(key,q,seed){
+  if(GEN[key]){ const it=GEN[key](rngFrom(seed)); it.type=it.type||q.type; it.tag=q.tag; it.figHtml=it.figHtml||''; return it; }
+  return {type:q.type,tag:q.tag,prompt:q.prompt,hint:q.hint,solution:q.solution,choices:q.choices,correct:q.correct,accept:q.accept,num:q.num,tol:q.tol,isPct:q.isPct,figHtml:q.fig?FIGS[q.fig]:''};
+}
+function answerUIof(key,it){
+  if(it.type==='choice'){
+    return '<div class="choices">'+it.choices.map((c,ci)=>`
+        <label class="choice" data-key="${key}" data-ci="${ci}"><input type="radio" name="${key}"><span class="lbl">${String.fromCharCode(65+ci)}</span><span>${c}</span></label>`).join('')+'</div>';
+  }
+  return `<div class="answerrow"><input type="text" placeholder="Type your answer…" data-key="${key}" autocomplete="off" spellcheck="false"><button class="checkbtn" data-check="${key}">Check</button></div>`;
+}
+function cardInner(key,it){
+  return `
+      <div class="qtop"><span class="qtag">${it.tag}</span><p class="qprompt">${it.prompt}</p></div>
+      ${it.hint?`<p class="hintline">💡 ${it.hint}</p>`:''}
+      ${it.figHtml?`<div class="figure">${it.figHtml}</div>`:''}
+      ${answerUIof(key,it)}
+      ${GEN[key]?`<div class="regenrow"><button class="regenbtn" data-regen="${key}">🔄 New problem</button></div>`:''}
+      <div class="feedback" id="fb_${key}"></div>`;
+}
 function renderUnit(u){
   const f=u.formulas.map(fc=>`
     <div class="fcard"><h4>${fc[0]}</h4><span class="eq">${fc[1]}</span><p>${fc[2]}</p></div>`).join('');
-
   const w=`
-    <div class="worked">
-      <p class="wtitle">${u.worked.title}</p>
-      <p class="prob">${u.worked.prob}</p>
-      <ol class="steps">${buildSteps(u.worked.steps)}</ol>
-    </div>`;
-
+    <div class="worked"><p class="wtitle">${u.worked.title}</p><p class="prob">${u.worked.prob}</p>${u.worked.fig?`<div class="figure">${FIGS[u.worked.fig]}</div>`:''}<ol class="steps">${buildSteps(u.worked.steps)}</ol></div>`;
   const qs=u.questions.map((q,i)=>{
-    const key=u.id+'_'+i;
-    const done=!!solved[key];
-    let answerUI='';
-    if(q.type==='choice'){
-      answerUI='<div class="choices">'+q.choices.map((c,ci)=>`
-        <label class="choice" data-key="${key}" data-ci="${ci}">
-          <input type="radio" name="${key}">
-          <span class="lbl">${String.fromCharCode(65+ci)}</span>
-          <span>${c}</span>
-        </label>`).join('')+'</div>';
-    } else {
-      answerUI=`<div class="answerrow">
-        <input type="text" placeholder="Type your answer…" data-key="${key}" autocomplete="off" spellcheck="false">
-        <button class="checkbtn" data-check="${key}">Check</button>
-      </div>`;
-    }
-    return `
-    <div class="q ${done?'solved':''}" id="q_${key}">
-      <div class="qtop">
-        <span class="qtag">${q.tag}</span>
-        <p class="qprompt">${q.prompt}</p>
-      </div>
-      ${q.hint?`<p class="hintline">💡 ${q.hint}</p>`:''}
-      ${answerUI}
-      <div class="feedback" id="fb_${key}"></div>
-    </div>`;
+    const key=keyOf(u,i);
+    if(seeds[key]==null) seeds[key]=newSeed();
+    const it=instanceFor(key,q,seeds[key]); inst[key]=it;
+    return `<div class="q ${solved[key]?'solved':''}" id="q_${key}">${cardInner(key,it)}</div>`;
   }).join('');
-
   return `
     <section id="${u.id}">
       <div class="sechead"><span class="num">${u.num}</span><h3>${u.title}</h3></div>
@@ -743,82 +1002,88 @@ function renderUnit(u){
       <div class="fgrid">${f}</div>
       <div class="block-label">Worked example</div>
       ${w}
-      <div class="block-label">Practice — checks your answer instantly</div>
+      <div class="block-label">Practice — tap “New problem” for endless variations</div>
       ${qs}
     </section>`;
 }
-
-document.getElementById('units').innerHTML = UNITS.map(renderUnit).join('');
+function renderAll(){
+  document.getElementById('units').innerHTML = UNITS.map(renderUnit).join('');
+  bindAll();
+}
 
 /* =========================================================
    INTERACTION
    ========================================================= */
-function qByKey(key){
-  const [uid,idx]=key.split('_');
-  const u=UNITS.find(x=>x.id===uid);
-  return {u, q:u.questions[+idx]};
-}
 function markSolved(key){
   solved[key]=true;
   document.getElementById('q_'+key)?.classList.add('solved');
   saveState();
   updateProgress();
 }
-function showFeedback(key, ok, q){
+function showFeedback(key, ok, it){
   const fb=document.getElementById('fb_'+key);
   fb.className='feedback show '+(ok?'ok':'no');
   if(ok){
-    fb.innerHTML=`<div class="ftitle">✓ Correct</div><div>${q.solution}</div>`;
+    fb.innerHTML=`<div class="ftitle">✓ Correct</div><div>${it.solution}</div>`;
   }else{
     fb.innerHTML=`<div class="ftitle">Not yet — try again</div>
       <div>Check the hint above, then give it another go.</div>
       <button class="soltoggle">Show full solution</button>
-      <div class="solution">${q.solution}</div>`;
+      <div class="solution">${it.solution}</div>`;
     fb.querySelector('.soltoggle').addEventListener('click',e=>{
-      e.target.nextElementSibling.classList.toggle('show');
-      e.target.textContent = e.target.nextElementSibling.classList.contains('show')?'Hide solution':'Show full solution';
+      const s=e.target.nextElementSibling; s.classList.toggle('show');
+      e.target.textContent = s.classList.contains('show')?'Hide solution':'Show full solution';
     });
   }
 }
-
-// text-answer checks
 function runText(key, opts={}){
-  const input=document.querySelector(`input[data-key="${key}"]`);
-  if(!input) return;
-  const {q}=qByKey(key);
+  const it=inst[key];
+  const input=document.querySelector(`#q_${key} input[data-key="${key}"]`);
+  if(!input||!it) return;
   const val=input.value;
-  const ok=isCorrect(q, val);
-  showFeedback(key, ok, q);
+  const ok=isCorrect(it, val);
+  showFeedback(key, ok, it);
   if(val.trim()!=='') responses[key]={t:'text', v:val};
   if(ok){ markSolved(key); if(!opts.restore) input.blur(); }
   saveState();
 }
-document.querySelectorAll('[data-check]').forEach(btn=>{
-  const key=btn.getAttribute('data-check');
-  const input=document.querySelector(`input[data-key="${key}"]`);
-  btn.addEventListener('click', ()=>runText(key));
-  input.addEventListener('keydown', e=>{ if(e.key==='Enter') runText(key); });
-});
-
-// choice checks
 function pickChoice(key, ci){
-  const {q}=qByKey(key);
-  const group=document.querySelectorAll(`.choice[data-key="${key}"]`);
-  if(!group.length) return;
+  const it=inst[key];
+  const group=document.querySelectorAll(`#q_${key} .choice`);
+  if(!group.length||!it) return;
   group.forEach(g=>g.classList.remove('pick','correct','wrong'));
-  const ok = ci===q.correct;
+  const ok = ci===it.correct;
   if(group[ci]) group[ci].querySelector('input').checked=true;
-  if(ok){ group[ci].classList.add('correct'); markSolved(key); }
-  else{ group[ci].classList.add('wrong'); group[q.correct].classList.add('correct'); }
-  showFeedback(key, ok, q);
+  if(ok){ group[ci]&&group[ci].classList.add('correct'); markSolved(key); }
+  else{ group[ci]&&group[ci].classList.add('wrong'); group[it.correct]&&group[it.correct].classList.add('correct'); }
+  showFeedback(key, ok, it);
   responses[key]={t:'choice', ci};
   saveState();
 }
-document.querySelectorAll('.choice').forEach(ch=>{
-  ch.addEventListener('click', ()=>{
-    pickChoice(ch.getAttribute('data-key'), +ch.getAttribute('data-ci'));
-  });
-});
+function regen(key){
+  const card=document.getElementById('q_'+key); if(!card) return;
+  const [uid,idx]=key.split('_'); const u=UNITS.find(x=>x.id===uid); const q=u.questions[+idx];
+  seeds[key]=newSeed();
+  const it=instanceFor(key,q,seeds[key]); inst[key]=it;
+  delete solved[key]; delete responses[key];
+  card.classList.remove('solved');
+  card.innerHTML=cardInner(key,it);
+  bindCard(key);
+  saveState(); updateProgress();
+}
+function bindCard(key){
+  const card=document.getElementById('q_'+key); if(!card) return;
+  const it=inst[key];
+  const rb=card.querySelector('[data-regen]'); if(rb) rb.addEventListener('click',()=>regen(key));
+  if(it.type==='choice'){
+    card.querySelectorAll('.choice').forEach(ch=>ch.addEventListener('click',()=>pickChoice(key,+ch.getAttribute('data-ci'))));
+  }else{
+    const btn=card.querySelector('[data-check]'); const input=card.querySelector('input[data-key]');
+    if(btn) btn.addEventListener('click',()=>runText(key));
+    if(input) input.addEventListener('keydown',e=>{ if(e.key==='Enter') runText(key); });
+  }
+}
+function bindAll(){ UNITS.forEach(u=>u.questions.forEach((q,i)=>bindCard(keyOf(u,i)))); }
 
 /* =========================================================
    PROGRESS RINGS / METER
@@ -856,26 +1121,23 @@ scrim.addEventListener('click',()=>{sidebar.classList.remove('open');scrim.class
 document.querySelectorAll('.navlist a').forEach(a=>a.addEventListener('click',()=>{sidebar.classList.remove('open');scrim.classList.remove('open');}));
 
 document.getElementById('resetBtn').addEventListener('click',async()=>{
-  if(!confirm('Clear all your saved answers and progress?')) return;
-  solved={};
-  responses={};
+  if(!confirm('Clear all your saved answers and progress? (You will get a fresh set of problems.)')) return;
+  solved={}; responses={}; seeds={}; inst={};
   try{ if(hasClaudeStore){ await window.storage.delete(STORE_KEY); } else { localStorage.removeItem(STORE_KEY); } }catch(e){}
-  // clear UI
-  document.querySelectorAll('.q').forEach(q=>q.classList.remove('solved'));
-  document.querySelectorAll('.feedback').forEach(f=>{f.className='feedback';f.innerHTML='';});
-  document.querySelectorAll('.choice').forEach(c=>{c.classList.remove('pick','correct','wrong');c.querySelector('input').checked=false;});
-  document.querySelectorAll('input[type=text][data-key]').forEach(i=>i.value='');
+  renderAll();
   updateProgress();
+  await saveState();
 });
 
 (async function boot(){
   await loadState();
   booting=true;
+  renderAll();                 // builds instances from saved seeds (or new) and binds events
   UNITS.forEach(u=>u.questions.forEach((q,i)=>{
-    const key=u.id+'_'+i;
+    const key=keyOf(u,i);
     const r=responses[key];
     if(r && r.t==='text'){
-      const input=document.querySelector(`input[data-key="${key}"]`);
+      const input=document.querySelector(`#q_${key} input[data-key="${key}"]`);
       if(input){ input.value=r.v; runText(key,{restore:true}); }
     } else if(r && r.t==='choice'){
       pickChoice(key, r.ci);
