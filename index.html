@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math 2 Honors — Final Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2c3343;
+    --ink-soft:#5a6478;
+    --paper:#f3f6fc;
+    --panel:#ffffff;
+    --line:#e6e9f3;
+    --violet:#3b6fe0;
+    --violet-deep:#2f59c0;
+    --violet-wash:#eaf1fd;
+    --amber:#e0962a;
+    --emerald:#13a07a;
+    --emerald-wash:#e6f6f0;
+    --rose:#e35d72;
+    --rose-wash:#fdecef;
+    --muted:#949cb0;
+    --radius:16px;
+    --shadow:0 1px 2px rgba(40,52,80,.04), 0 10px 30px -18px rgba(40,52,80,.20);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;font-family:"Inter",system-ui,sans-serif;color:var(--ink);
+    background:linear-gradient(180deg,#f5f8fd 0%, #eaf0fa 100%);background-attachment:fixed;
+    line-height:1.55;-webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:"JetBrains Mono",monospace;}
+
+  /* ---------- Layout ---------- */
+  .shell{display:grid;grid-template-columns:268px 1fr;min-height:100vh;}
+  .sidebar{
+    position:sticky;top:0;height:100vh;overflow-y:auto;background:#ffffff;
+    color:var(--ink);padding:26px 18px 40px;border-right:1px solid var(--line);
+  }
+  .brand{display:flex;flex-direction:column;gap:2px;margin-bottom:22px;}
+  .brand .kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet);font-weight:700;}
+  .brand h1{font-family:"Space Grotesk";font-weight:700;font-size:21px;margin:2px 0 0;line-height:1.15;letter-spacing:-.01em;color:var(--ink);}
+  .brand .sub{font-size:12.5px;color:var(--muted);}
+
+  .navlist{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:3px;}
+  .navlist a{
+    display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink-soft);
+    padding:9px 11px;border-radius:10px;font-size:13.5px;font-weight:500;transition:.15s;
+  }
+  .navlist a:hover{background:var(--violet-wash);color:var(--violet-deep);}
+  .navlist a .ix{font-family:"JetBrains Mono";font-size:11px;color:var(--muted);width:18px;}
+  .navlist a .ring{margin-left:auto;}
+  .ring{--p:0;position:relative;width:26px;height:26px;border-radius:50%;
+    background:conic-gradient(var(--violet) calc(var(--p)*1%), #e6e9f3 0);
+    display:grid;place-items:center;flex:none;}
+  .ring::after{content:"";width:18px;height:18px;border-radius:50%;background:#ffffff;}
+  .ring.done{background:var(--emerald);}
+  .ring.done::after{opacity:0;}
+  .ring.done::before{content:"✓";position:absolute;color:#fff;font-size:13px;font-weight:700;z-index:2;}
+
+  .overall{margin-top:22px;padding:16px;border-radius:16px;
+    background:linear-gradient(135deg,#eaf1fd 0%, #e7f6f1 100%);border:1px solid #dde6f6;}
+  .overall .lab{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-deep);font-weight:700;}
+  .overall .big{font-family:"Space Grotesk";font-size:30px;font-weight:700;line-height:1;margin:6px 0 8px;color:var(--ink);}
+  .bar{height:8px;border-radius:99px;background:#d6deee;overflow:hidden;}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--violet),#37c0a3);border-radius:99px;transition:width .5s cubic-bezier(.2,.8,.2,1);}
+  .resetbtn{margin-top:12px;width:100%;background:#fff;border:1px solid #d3deef;color:var(--ink-soft);
+    font-size:11.5px;padding:7px;border-radius:9px;cursor:pointer;font-family:inherit;transition:.15s;}
+  .resetbtn:hover{background:var(--violet-wash);color:var(--violet-deep);border-color:#c2d3f4;}
+
+  main{padding:0 0 90px;}
+  .topbar{
+    position:sticky;top:0;z-index:20;background:rgba(244,247,253,.85);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);padding:13px 40px;display:flex;align-items:center;gap:16px;
+  }
+  .topbar .tt{font-family:"Space Grotesk";font-weight:600;font-size:14px;letter-spacing:-.01em;}
+  .topbar .tally{margin-left:auto;font-size:12.5px;color:var(--muted);font-family:"JetBrains Mono";}
+  .topbar .menu-btn{display:none;}
+
+  .wrap{max-width:880px;margin:0 auto;padding:0 40px;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:54px 0 30px;border-bottom:1px solid var(--line);}
+  .hero .eyebrow{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--violet);font-weight:700;}
+  .hero h2{font-family:"Space Grotesk";font-weight:700;font-size:clamp(30px,5vw,46px);line-height:1.04;letter-spacing:-.025em;margin:12px 0 14px;}
+  .hero h2 em{font-style:normal;color:var(--violet);}
+  .hero p{font-size:15.5px;color:var(--ink-soft);max-width:60ch;margin:0 0 22px;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{font-size:12px;font-weight:600;background:var(--panel);border:1px solid var(--line);
+    padding:6px 12px;border-radius:99px;color:var(--ink-soft);}
+  .chip b{color:var(--violet);}
+
+  /* ---------- Sections ---------- */
+  section{padding:46px 0;border-bottom:1px solid var(--line);}
+  section:last-child{border-bottom:none;}
+  .sechead{display:flex;align-items:baseline;gap:14px;margin-bottom:8px;}
+  .sechead .num{font-family:"JetBrains Mono";font-size:13px;color:var(--violet);font-weight:700;
+    border:1.5px solid var(--violet);border-radius:8px;padding:3px 9px;flex:none;}
+  .sechead h3{font-family:"Space Grotesk";font-weight:700;font-size:25px;letter-spacing:-.02em;margin:0;}
+  .sectag{font-size:13px;color:var(--muted);margin:0 0 26px;}
+
+  .block-label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--amber);margin:30px 0 12px;display:flex;align-items:center;gap:8px;}
+  .block-label::before{content:"";width:16px;height:2px;background:var(--amber);}
+
+  /* formula cards */
+  .fcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 18px;box-shadow:var(--shadow);margin-bottom:12px;}
+  .fcard h4{margin:0 0 4px;font-size:14.5px;font-family:"Space Grotesk";font-weight:600;}
+  .fcard .eq{font-family:"JetBrains Mono";font-size:14.5px;background:var(--violet-wash);color:var(--violet-deep);
+    display:inline-block;padding:5px 11px;border-radius:8px;margin:3px 0 7px;font-weight:500;}
+  .fcard p{margin:0;font-size:13.5px;color:var(--ink-soft);}
+  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+  /* worked example */
+  .worked{background:#fffdf8;border:1px solid #ecdfc4;border-left:4px solid var(--amber);
+    border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);}
+  .worked .wtitle{font-family:"Space Grotesk";font-weight:600;font-size:15px;margin:0 0 4px;}
+  .worked .prob{font-size:14px;color:var(--ink-soft);margin:0 0 14px;font-style:italic;}
+  .steps{counter-reset:s;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .steps li{counter-increment:s;display:flex;gap:11px;font-size:13.8px;}
+  .steps li::before{content:counter(s);font-family:"JetBrains Mono";font-weight:700;font-size:11px;
+    background:var(--amber);color:#fff;width:20px;height:20px;border-radius:6px;display:grid;place-items:center;flex:none;margin-top:1px;}
+  .steps .ans{background:var(--emerald-wash);color:var(--emerald);font-weight:600;padding:8px 12px;border-radius:8px;margin-top:5px;font-family:"JetBrains Mono";font-size:13.5px;}
+  .mq{font-family:"JetBrains Mono";background:#eef2fa;padding:1px 5px;border-radius:4px;font-size:.92em;}
+
+  /* practice question */
+  .q{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px;box-shadow:var(--shadow);margin-bottom:14px;}
+  .q.solved{border-color:var(--emerald);box-shadow:0 0 0 1px var(--emerald),var(--shadow);}
+  .qtop{display:flex;gap:10px;align-items:flex-start;}
+  .qtag{font-family:"JetBrains Mono";font-size:11px;font-weight:700;color:#fff;background:var(--violet);
+    padding:3px 8px;border-radius:6px;flex:none;margin-top:1px;}
+  .q.solved .qtag{background:var(--emerald);}
+  .qprompt{font-size:14.5px;font-weight:500;margin:0;}
+  .qprompt .mq{font-weight:400;}
+  .hintline{font-size:12.5px;color:var(--muted);margin:9px 0 0;}
+
+  .answerrow{display:flex;gap:9px;margin-top:14px;flex-wrap:wrap;}
+  .answerrow input[type=text]{
+    flex:1;min-width:180px;font-family:"JetBrains Mono";font-size:14px;padding:10px 13px;
+    border:1.5px solid var(--line);border-radius:10px;background:#f7f9fd;color:var(--ink);transition:.15s;}
+  .answerrow input:focus{outline:none;border-color:var(--violet);background:#fff;box-shadow:0 0 0 3px var(--violet-wash);}
+  .checkbtn{font-family:inherit;font-weight:600;font-size:13.5px;background:var(--violet);color:#fff;border:none;
+    padding:10px 20px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap;}
+  .checkbtn:hover{background:var(--violet-deep);}
+  .checkbtn:active{transform:translateY(1px);}
+
+  .choices{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+  .choice{display:flex;align-items:center;gap:11px;border:1.5px solid var(--line);border-radius:10px;
+    padding:10px 14px;cursor:pointer;font-size:14px;transition:.13s;background:#f7f9fd;}
+  .choice:hover{border-color:var(--violet);background:#fff;}
+  .choice input{accent-color:var(--violet);width:16px;height:16px;flex:none;}
+  .choice .lbl{font-family:"JetBrains Mono";font-weight:700;color:var(--muted);font-size:12px;}
+  .choice.pick{border-color:var(--violet);background:var(--violet-wash);}
+  .choice.correct{border-color:var(--emerald);background:var(--emerald-wash);}
+  .choice.wrong{border-color:var(--rose);background:var(--rose-wash);}
+
+  .feedback{margin-top:13px;border-radius:10px;padding:12px 15px;font-size:13.6px;display:none;}
+  .feedback.show{display:block;animation:pop .25s ease;}
+  @keyframes pop{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+  .feedback.ok{background:var(--emerald-wash);color:#0b5e4d;border:1px solid #b6e3d6;}
+  .feedback.no{background:var(--rose-wash);color:#9a2238;border:1px solid #f2c4cd;}
+  .feedback .ftitle{font-weight:700;display:flex;align-items:center;gap:7px;margin-bottom:3px;font-family:"Space Grotesk";}
+  .soltoggle{background:none;border:none;color:var(--violet-deep);font-weight:600;font-size:12.5px;
+    cursor:pointer;padding:0;margin-top:9px;text-decoration:underline;font-family:inherit;}
+  .solution{display:none;margin-top:11px;padding-top:11px;border-top:1px dashed var(--line);}
+  .solution.show{display:block;}
+
+  /* tables */
+  .tw{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 4px;}
+  .tw th,.tw td{border:1px solid var(--line);padding:7px 10px;text-align:center;font-family:"JetBrains Mono";}
+  .tw th{background:var(--violet-wash);color:var(--violet-deep);font-weight:700;}
+  .tw td.rh{background:#eef2fb;font-weight:700;}
+
+  footer{max-width:880px;margin:0 auto;padding:40px;color:var(--muted);font-size:12.5px;text-align:center;}
+
+  @media (max-width:860px){
+    .shell{grid-template-columns:1fr;}
+    .sidebar{position:fixed;left:0;top:0;width:280px;z-index:50;transform:translateX(-100%);transition:.25s;box-shadow:0 0 40px rgba(0,0,0,.3);}
+    .sidebar.open{transform:none;}
+    .topbar .menu-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;
+      border:1px solid var(--line);background:var(--panel);border-radius:9px;cursor:pointer;font-size:18px;}
+    .wrap,.topbar{padding-left:20px;padding-right:20px;}
+    .fgrid{grid-template-columns:1fr;}
+    .scrim{position:fixed;inset:0;background:rgba(20,18,40,.5);z-index:40;display:none;}
+    .scrim.open{display:block;}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <span class="kicker">Math 2 Acc / Hon</span>
+      <h1>Final Exam<br>Study Guide</h1>
+      <span class="sub">Quadratics → Trig · 2025–2026</span>
+    </div>
+    <nav>
+      <ul class="navlist" id="navlist">
+        <li><a href="#ref"><span class="ix">§</span>Formula Dictionary<span class="ring" data-ring="ref"></span></a></li>
+        <li><a href="#u1"><span class="ix">01</span>Quadratic Functions<span class="ring" data-ring="u1"></span></a></li>
+        <li><a href="#u2"><span class="ix">02</span>Factoring Polynomials<span class="ring" data-ring="u2"></span></a></li>
+        <li><a href="#u3"><span class="ix">03</span>Transformations<span class="ring" data-ring="u3"></span></a></li>
+        <li><a href="#u4"><span class="ix">04</span>Composition & Inverses<span class="ring" data-ring="u4"></span></a></li>
+        <li><a href="#u5"><span class="ix">05</span>Probability<span class="ring" data-ring="u5"></span></a></li>
+        <li><a href="#u6"><span class="ix">06</span>Geometry & Similarity<span class="ring" data-ring="u6"></span></a></li>
+        <li><a href="#u7"><span class="ix">07</span>Right-Triangle Trig<span class="ring" data-ring="u7"></span></a></li>
+      </ul>
+    </nav>
+    <div class="overall">
+      <span class="lab">Mastery</span>
+      <div class="big" id="pctBig">0%</div>
+      <div class="bar"><i id="pctBar"></i></div>
+      <button class="resetbtn" id="resetBtn">Reset all progress</button>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <!-- ============ MAIN ============ -->
+  <main>
+    <div class="topbar">
+      <button class="menu-btn" id="menuBtn">☰</button>
+      <span class="tt">Final Review</span>
+      <span class="tally" id="tally">0 / 0 solved</span>
+    </div>
+
+    <div class="wrap">
+      <header class="hero">
+        <span class="eyebrow">Everything on the final, in one place</span>
+        <h2>Practice it, <em>check it</em>,<br>walk in ready.</h2>
+        <p>Built from your yellow and green packets. Each unit gives you the formulas, one fully worked example, and practice problems that grade themselves the moment you hit <b>Check</b>. Your progress saves automatically, so you can leave and pick up where you left off.</p>
+        <div class="chips">
+          <span class="chip"><b>7</b> units</span>
+          <span class="chip"><b>33</b> self-checking problems</span>
+          <span class="chip"><b>40+</b> formulas</span>
+          <span class="chip">Type <b>sqrt</b> for √ · <b>pi</b> for π</span>
+        </div>
+      </header>
+
+      <!-- ===================== FORMULA DICTIONARY ===================== -->
+      <section id="ref">
+        <div class="sechead"><span class="num">§</span><h3>Formula Dictionary</h3></div>
+        <p class="sectag">Every equation you might need, and what each one actually does.</p>
+
+        <div class="block-label">Quadratics</div>
+        <div class="fgrid">
+          <div class="fcard"><h4>Vertex form</h4><span class="eq">f(x) = a(x − h)² + k</span><p>Vertex is <b>(h, k)</b>. <b>a</b> stretches the parabola and flips it down if negative. Best when you know the vertex.</p></div>
+          <div class="fcard"><h4>Factored (intercept) form</h4><span class="eq">f(x) = a(x − p)(x − q)</span><p>Roots / x-intercepts are <b>p</b> and <b>q</b>. Best when you can read the zeros off a graph.</p></div>
+          <div class="fcard"><h4>Standard form</h4><span class="eq">f(x) = ax² + bx + c</span><p><b>c</b> is the y-intercept. Multiply the other forms out to land here.</p></div>
+          <div class="fcard"><h4>Axis of symmetry</h4><span class="eq">x = −b / (2a)</span><p>Vertical line through the vertex; the x-coordinate of the vertex.</p></div>
+          <div class="fcard"><h4>Solve for a</h4><span class="eq">plug in one known point</span><p>Substitute a point that isn't the vertex/root, then solve the resulting equation for a.</p></div>
+          <div class="fcard"><h4>Quadratic formula</h4><span class="eq">x = (−b ± √(b²−4ac)) / 2a</span><p>Roots of any ax²+bx+c. The √(b²−4ac) is the discriminant — negative means no real roots.</p></div>
+        </div>
+
+        <div class="block-label">Factoring patterns</div>
+        <div class="fgrid">
+          <div class="fcard"><h4>Difference of squares</h4><span class="eq">a² − b² = (a − b)(a + b)</span><p>Two perfect squares with a minus. Note: a²+b² does <b>not</b> factor over the reals.</p></div>
+          <div class="fcard"><h4>GCF first, always</h4><span class="eq">pull out common factors</span><p>Before anything else, divide out the greatest common factor of every term.</p></div>
+          <div class="fcard"><h4>Factor by grouping</h4><span class="eq">4 terms → group in pairs</span><p>Group, factor each pair, then factor out the shared binomial.</p></div>
+          <div class="fcard"><h4>Trinomial ax²+bx+c</h4><span class="eq">find factors of a·c that add to b</span><p>Split the middle term, then group.</p></div>
+        </div>
+
+        <div class="block-label">Functions</div>
+        <div class="fgrid">
+          <div class="fcard"><h4>Transformation template</h4><span class="eq">g(x) = a · f(x − h) + k</span><p><b>h</b> = horizontal shift, <b>k</b> = vertical shift, <b>a</b> = vertical stretch (|a|&gt;1) or shrink, negative <b>a</b> flips over the x-axis.</p></div>
+          <div class="fcard"><h4>Composition</h4><span class="eq">(f ∘ g)(x) = f(g(x))</span><p>Inside-out: evaluate g first, substitute the whole thing into f.</p></div>
+          <div class="fcard"><h4>Inverse</h4><span class="eq">swap x & y, solve for y</span><p>f⁻¹ undoes f. Graph is the reflection over the line y = x.</p></div>
+          <div class="fcard"><h4>Domain rules</h4><span class="eq">denom ≠ 0 · even root ≥ 0</span><p>No division by zero; the inside of √ , ⁴√ , … must be ≥ 0. Cube roots & polynomials are all reals.</p></div>
+          <div class="fcard"><h4>Even / Odd</h4><span class="eq">even: f(−x)=f(x) · odd: f(−x)=−f(x)</span><p>Even = mirror over y-axis. Odd = 180° rotation about the origin.</p></div>
+          <div class="fcard"><h4>Interval notation</h4><span class="eq">[ ] include · ( ) exclude · ∪ join</span><p>Open circle on a graph → parenthesis. Filled dot → bracket.</p></div>
+        </div>
+
+        <div class="block-label">Probability</div>
+        <div class="fgrid">
+          <div class="fcard"><h4>Conditional probability</h4><span class="eq">P(A | B) = P(A and B) / P(B)</span><p>"Given B," your whole world shrinks to B. Divide the overlap by B's total.</p></div>
+          <div class="fcard"><h4>Union (OR)</h4><span class="eq">P(A or B) = P(A) + P(B) − P(A and B)</span><p>Add the two, subtract the double-counted overlap.</p></div>
+          <div class="fcard"><h4>Tree → total</h4><span class="eq">multiply along branches</span><p>Multiply probabilities down a path; add across paths that reach the same outcome.</p></div>
+        </div>
+
+        <div class="block-label">Geometry & Similarity</div>
+        <div class="fgrid">
+          <div class="fcard"><h4>Geometric mean (altitude)</h4><span class="eq">altitude = (leg₁ · leg₂) / hypotenuse</span><p>Altitude drawn to the hypotenuse of a right triangle. Equivalently h = √(p·q) from the two hypotenuse pieces.</p></div>
+          <div class="fcard"><h4>Similar triangles</h4><span class="eq">corresponding sides proportional</span><p>Set up a proportion of matching sides and cross-multiply.</p></div>
+          <div class="fcard"><h4>Cone volume / surface</h4><span class="eq">V = ⅓πr²h · SA = πr² + πrℓ</span><p>ℓ = slant = √(r²+h²). "Total" SA includes the base circle πr².</p></div>
+          <div class="fcard"><h4>Regular hexagon area</h4><span class="eq">A = (3√3 / 2) · s²</span><p>s = side length. Prism volume = (base area)·height.</p></div>
+          <div class="fcard"><h4>Equilateral triangle area</h4><span class="eq">A = (√3 / 4) · s²</span><p>All sides s. Altitude of an equilateral triangle is (s√3)/2.</p></div>
+          <div class="fcard"><h4>Square in a right triangle</h4><span class="eq">s = (leg₁ · leg₂) / (leg₁ + leg₂)</span><p>Square sharing the right-angle corner, sides along the legs.</p></div>
+        </div>
+
+        <div class="block-label">Right-Triangle Trig</div>
+        <div class="fgrid">
+          <div class="fcard"><h4>SOH-CAH-TOA</h4><span class="eq">sin=opp/hyp · cos=adj/hyp · tan=opp/adj</span><p>Ratios from the reference angle θ. Opposite, adjacent, hypotenuse.</p></div>
+          <div class="fcard"><h4>Reciprocal ratios</h4><span class="eq">csc=hyp/opp · sec=hyp/adj · cot=adj/opp</span><p>Flip sin, cos, tan respectively.</p></div>
+          <div class="fcard"><h4>Inverse trig (find the angle)</h4><span class="eq">θ = tan⁻¹(opp/adj), etc.</span><p>Use when you know two sides and want the angle.</p></div>
+          <div class="fcard"><h4>Pythagorean theorem</h4><span class="eq">leg₁² + leg₂² = hyp²</span><p>Find the missing side, then build any ratio you need.</p></div>
+        </div>
+      </section>
+
+      <!-- ===================== sections injected by JS ===================== -->
+      <div id="units"></div>
+
+      <footer>
+        Made for Ande's Math 2 Honors final. Answers checked locally — radicals like <span class="mq">3sqrt17</span> and fractions like <span class="mq">60/13</span> are both accepted. Good luck. You've got this.
+      </footer>
+    </div>
+  </main>
+</div>
+
+<script>
+/* =========================================================
+   CONTENT  — each unit: formulas, one worked example, questions
+   q types: "text" (typed answer) | "choice" (multiple choice)
+   ========================================================= */
+const UNITS = [
+{
+  id:"u1", num:"01", title:"Quadratic Functions",
+  tag:"Write a parabola in all three forms, and model real situations with a vertex.",
+  formulas:[
+    ["Three forms","Vertex a(x−h)²+k · Factored a(x−p)(x−q) · Standard ax²+bx+c","Same parabola, three outfits. Pick the one that matches what you're given."],
+    ["Find a","substitute a known point","After locating the vertex or roots, plug in one more point to solve for a."]
+  ],
+  worked:{
+    title:"Worked example — one graph, three forms",
+    prob:"A parabola has vertex (4, −2) and passes through (0, 6). Write vertex, factored, and standard form.",
+    steps:[
+      ['Start in vertex form since you know the vertex (4, −2): <span class="mq">f(x)=a(x−4)²−2</span>.'],
+      ['Plug in the point (0, 6) to find a: <span class="mq">6 = a(0−4)²−2 → 6 = 16a−2 → a = ½</span>.'],
+      ['Vertex form is done.','ans:f(x) = ½(x − 4)² − 2'],
+      ['Factored form: with a=½ and vertex x=4, the roots sit symmetrically. Setting ½(x−4)²−2=0 gives x=2 and x=6.','ans:f(x) = ½(x − 6)(x − 2)'],
+      ['Standard form: expand ½(x−6)(x−2) = ½(x²−8x+12).','ans:f(x) = ½x² − 4x + 6']
+    ]
+  },
+  questions:[
+    {type:"choice", tag:"Q1", prompt:'A parabola has vertex <span class="mq">(3, −4)</span> and passes through a point giving <span class="mq">a = 2</span>. Which is correct vertex form?',
+      choices:["2(x + 3)² − 4","2(x − 3)² − 4","2(x − 3)² + 4","2(x − 4)² − 3"], correct:1,
+      hint:"Vertex (h,k) goes in as (x − h)² + k. Watch the signs.",
+      solution:'Vertex (3, −4) → (x − 3)² and + (−4). With a = 2: <span class="mq">2(x − 3)² − 4</span>.'},
+    {type:"choice", tag:"Q2", prompt:'A parabola has x-intercepts at <span class="mq">x = 2</span> and <span class="mq">x = 6</span> with <span class="mq">a = ½</span>. Factored form?',
+      choices:["½(x + 6)(x + 2)","2(x − 6)(x − 2)","½(x − 6)(x − 2)","½(x − 2)(x − 8)"], correct:2,
+      hint:"Each root r becomes a factor (x − r).",
+      solution:'Roots 2 and 6 → factors (x − 2)(x − 6), times a = ½: <span class="mq">½(x − 6)(x − 2)</span>.'},
+    {type:"choice", tag:"Q3", prompt:'Expand <span class="mq">½(x − 6)(x − 2)</span> into standard form.',
+      choices:["½x² − 4x + 6","½x² − 8x + 12","x² − 4x + 6","½x² + 4x − 6"], correct:0,
+      hint:"Multiply the binomials first, then distribute the ½.",
+      solution:'(x−6)(x−2)=x²−8x+12, then ½(x²−8x+12) = <span class="mq">½x² − 4x + 6</span>.'},
+    {type:"text", tag:"Q4", prompt:'<b>Evel Knievel jump.</b> Take-off and landing ramps are 6 ft tall, 30 ft apart, and the peak is 15 ft high at the center (vertex at x = 15, y = 15). Using <span class="mq">f(x)=a(x−15)²+15</span> with the take-off point (0, 6), find <b>a</b>.',
+      accept:["-0.04","-1/25"], num:-0.04, tol:0.002,
+      hint:"Plug the take-off point (0, 6) into the vertex form and solve for a.",
+      solution:'6 = a(0−15)²+15 → 6 = 225a + 15 → −9 = 225a → <span class="mq">a = −0.04</span>.'},
+    {type:"text", tag:"Q5", prompt:'Using <span class="mq">y = −0.04(x − 15)² + 15</span>, how high (ft) is Evel when he is 5 ft to the right of the take-off (x = 5)?',
+      accept:["11","11ft"], num:11, tol:0.01,
+      hint:"Substitute x = 5 and simplify.",
+      solution:'y = −0.04(5−15)²+15 = −0.04(100)+15 = −4 + 15 = <span class="mq">11 ft</span>.'}
+  ]
+},
+{
+  id:"u2", num:"02", title:"Factoring Polynomials",
+  tag:"GCF, difference of squares, trinomials, and grouping — factor completely.",
+  formulas:[
+    ["Difference of squares","a² − b² = (a − b)(a + b)","Two squares, minus sign. a²+b² stays prime over the reals."],
+    ["Grouping (4 terms)","group pairs → shared binomial","Factor each pair, then pull the common ( ) out front."]
+  ],
+  worked:{
+    title:"Worked example — factor by grouping",
+    prob:"Factor completely: x³ + 2x² − 9x − 18.",
+    steps:[
+      ['Four terms → group into pairs: <span class="mq">(x³ + 2x²) + (−9x − 18)</span>.'],
+      ['Factor each pair: <span class="mq">x²(x + 2) − 9(x + 2)</span>.'],
+      ['Pull out the shared (x + 2): <span class="mq">(x + 2)(x² − 9)</span>.'],
+      ['x² − 9 is a difference of squares — keep going: <span class="mq">(x − 3)(x + 3)</span>.','ans:(x + 2)(x − 3)(x + 3)']
+    ]
+  },
+  questions:[
+    {type:"choice", tag:"Q1", prompt:'Factor completely: <span class="mq">x² − 81</span>.',
+      choices:["(x − 9)²","(x − 9)(x + 9)","(x − 81)(x + 1)","prime"], correct:1,
+      hint:"This is a difference of squares, not a perfect-square trinomial.",
+      solution:'81 = 9², so x² − 81 = <span class="mq">(x − 9)(x + 9)</span>. (Heads up: (x−9)² would be x²−18x+81 — different!)'},
+    {type:"choice", tag:"Q2", prompt:'Factor: <span class="mq">x² + 4x − 21</span>.',
+      choices:["(x + 3)(x − 7)","(x + 7)(x − 3)","(x − 7)(x − 3)","(x + 21)(x − 1)"], correct:1,
+      hint:"Need two numbers that multiply to −21 and add to +4.",
+      solution:'+7 and −3 multiply to −21, add to +4 → <span class="mq">(x + 7)(x − 3)</span>.'},
+    {type:"choice", tag:"Q3", prompt:'Factor: <span class="mq">3x² − 20x − 7</span>.',
+      choices:["(3x + 1)(x − 7)","(3x − 1)(x + 7)","(3x − 7)(x + 1)","(x − 7)(3x + 7)"], correct:0,
+      hint:"a·c = −21. Find factors of −21 that combine to −20 after splitting the middle.",
+      solution:'Split −20x as +x − 21x: 3x²+x−21x−7 = x(3x+1)−7(3x+1) = <span class="mq">(3x + 1)(x − 7)</span>.'},
+    {type:"choice", tag:"Q4", prompt:'Factor completely: <span class="mq">x⁴ + 5x² − 36</span>.',
+      choices:["(x² + 9)(x² − 4)","(x² + 9)(x − 2)(x + 2)","(x² − 9)(x² + 4)","(x + 6)(x − 6)"], correct:1,
+      hint:"Treat it like a quadratic in x², factor, then keep factoring any difference of squares.",
+      solution:'Let u = x²: u²+5u−36 = (u+9)(u−4) = (x²+9)(x²−4). Then x²−4 factors more → <span class="mq">(x² + 9)(x − 2)(x + 2)</span>.'},
+    {type:"choice", tag:"Q5", prompt:'Factor out the GCF: <span class="mq">2x³y − 6x⁴y² + 10xy⁵ − 22x</span>.',
+      choices:["2x(x²y − 3x³y² + 5y⁵ − 11)","2(x³y − 3x⁴y² + 5xy⁵ − 11x)","x(2x²y − 6x³y² + 10y⁵ − 22)","2xy(x² − 3x³y + 5y⁴ − 11)"], correct:0,
+      hint:"What is common to every single term? Each term has at least one x and a factor of 2.",
+      solution:'Every term shares 2x → <span class="mq">2x(x²y − 3x³y² + 5y⁵ − 11)</span>. (The last term has no y, so y can\'t come out.)'}
+  ]
+},
+{
+  id:"u3", num:"03", title:"Transformations & Parent Functions",
+  tag:"Name the parents, read shifts/stretches/flips, and rewrite to reveal them.",
+  formulas:[
+    ["Transformation template","g(x) = a·f(x − h) + k","h right, k up, a stretches, −a flips over the x-axis."],
+    ["Parents to memorize","x², x³, √x, ∛x, 1/x, |x|, 2ˣ, int(x)","Know each shape, domain, and where it sits at the origin."]
+  ],
+  worked:{
+    title:"Worked example — rewrite to reveal transformations",
+    prob:"Rewrite y = ∛(4x + 12) − 3 to expose its transformations, then describe them.",
+    steps:[
+      ['Factor inside the radical: <span class="mq">∛(4(x + 3)) − 3</span>.'],
+      ['Split the cube root: <span class="mq">∛4 · ∛(x + 3) − 3</span>.'],
+      ['Now read it off the template a·f(x−h)+k with a = ∛4, h = −3, k = −3.'],
+      ['Describe each piece.','ans:Vertical stretch by ∛4 · shift LEFT 3 · shift DOWN 3']
+    ]
+  },
+  questions:[
+    {type:"choice", tag:"Q1", prompt:'Which parent function is <span class="mq">y = 1/x</span>?',
+      choices:["Absolute value","Reciprocal (rational)","Cube root","Exponential"], correct:1,
+      hint:"It has two branches and asymptotes at the axes.",
+      solution:'y = 1/x is the <b>reciprocal / rational</b> parent, with a vertical and horizontal asymptote.'},
+    {type:"choice", tag:"Q2", prompt:'Describe the transformations of <span class="mq">f(x) = −(x − 3)³</span> from the parent x³.',
+      choices:["Right 3, reflect over x-axis","Left 3, reflect over x-axis","Right 3, reflect over y-axis","Up 3, reflect over x-axis"], correct:0,
+      hint:"(x − 3) shifts horizontally; the leading negative flips vertically.",
+      solution:'(x − 3) → right 3; the negative out front reflects over the x-axis. So <b>right 3, reflect over x-axis</b>.'},
+    {type:"choice", tag:"Q3", prompt:'For <span class="mq">y = ∛4 · ∛(x + 3) − 3</span>, the horizontal & vertical shifts are:',
+      choices:["Right 3, up 3","Left 3, down 3","Left 3, up 3","Right 3, down 3"], correct:1,
+      hint:"(x + 3) means h = −3. The −3 outside is k.",
+      solution:'(x + 3) → left 3; the −3 outside → down 3. <b>Left 3, down 3</b>.'},
+    {type:"choice", tag:"Q4", prompt:'A graph has an <b>open circle at the origin</b>, covering x-values from −1 up to 2 (including 2). Domain in interval notation:',
+      choices:["[−1, 2]","[−1, 0) ∪ (0, 2]","(−1, 0] ∪ [0, 2)","[−1, 0] ∪ [0, 2]"], correct:1,
+      hint:"Open circle at 0 → exclude 0 with parentheses. Filled endpoints get brackets.",
+      solution:'Include −1 and 2 (brackets), exclude 0 (open circle): <span class="mq">[−1, 0) ∪ (0, 2]</span>.'},
+    {type:"choice", tag:"Q5", prompt:'End behavior of a standard <b>cube root</b> graph (y = ∛x):',
+      choices:["As x→∞, y→∞ ; as x→−∞, y→−∞","As x→∞, y→∞ ; as x→−∞, y→∞","As x→∞, y→0 ; as x→−∞, y→0","As x→∞, y→−∞ ; as x→−∞, y→∞"], correct:0,
+      hint:"Cube root rises forever in both directions, like an odd function.",
+      solution:'∛x increases without bound both ways: <b>x→∞ ⇒ y→∞</b> and <b>x→−∞ ⇒ y→−∞</b>.'}
+  ]
+},
+{
+  id:"u4", num:"04", title:"Composition, Decomposition & Inverses",
+  tag:"Compose functions, break them apart, find inverses, and state domain restrictions.",
+  formulas:[
+    ["Composition","(f ∘ g)(x) = f(g(x))","Evaluate the inside function first, then feed it to the outside one."],
+    ["Inverse","swap x and y, solve for y","Undoes the original; reflects across y = x."]
+  ],
+  worked:{
+    title:"Worked example — composition",
+    prob:"f(x) = 6x − 3 and g(x) = x³ + 2. Find f(g(x)).",
+    steps:[
+      ['Replace every x in f with the whole g: <span class="mq">f(g(x)) = 6(x³ + 2) − 3</span>.'],
+      ['Distribute the 6: <span class="mq">6x³ + 12 − 3</span>.'],
+      ['Combine constants.','ans:f(g(x)) = 6x³ + 9']
+    ]
+  },
+  questions:[
+    {type:"choice", tag:"Q1", prompt:'With <span class="mq">j(x) = 2x² − 1</span> and <span class="mq">k(x) = 4 − x</span>, find <span class="mq">(k ∘ j)(x)</span>.',
+      choices:["5 − 2x²","2x² + 3","−2x² − 3","8x² − 5"], correct:0,
+      hint:"k(j(x)) = 4 − (whole j).",
+      solution:'k(j(x)) = 4 − (2x² − 1) = 4 − 2x² + 1 = <span class="mq">5 − 2x²</span>.'},
+    {type:"choice", tag:"Q2", prompt:'f(x) = 6x − 3 and g(x) = x³ + 2. Which equals <span class="mq">f(g(x))</span>?',
+      choices:["(6x − 1)³","6x³ − 1","(6x − 3)³ + 2","6x³ + 9"], correct:3,
+      hint:"Substitute g into f, then simplify.",
+      solution:'6(x³ + 2) − 3 = 6x³ + 12 − 3 = <span class="mq">6x³ + 9</span>.'},
+    {type:"choice", tag:"Q3", prompt:'Decompose <span class="mq">m(x) = √(x − 7)</span> so that m = q(r(x)):',
+      choices:["q(x)=√x , r(x)=x − 7","q(x)=x − 7 , r(x)=√x","q(x)=√(x) − 7 , r(x)=x","q(x)=x² , r(x)=√x − 7"], correct:0,
+      hint:"The outer (last) operation is the square root; the inner is x − 7.",
+      solution:'Inside r(x) = x − 7, then outside q(x) = √x → q(r(x)) = √(x − 7). ✓'},
+    {type:"choice", tag:"Q4", prompt:'Find the inverse of <span class="mq">f(x) = 3√(x + 2) − 4</span>.',
+      choices:["f⁻¹(x) = ((x + 4)/3)² − 2","f⁻¹(x) = 3√(x − 2) + 4","f⁻¹(x) = ((x − 4)/3)² + 2","f⁻¹(x) = (x + 4)²/3 − 2"], correct:0,
+      hint:"Swap x and y, isolate the radical, then square both sides.",
+      solution:'y = 3√(x+2) − 4 → swap → x = 3√(y+2) − 4 → (x+4)/3 = √(y+2) → square → y = <span class="mq">((x + 4)/3)² − 2</span>.'},
+    {type:"choice", tag:"Q5", prompt:'Domain of <span class="mq">g(x) = √(5 − 2x)</span> in interval notation:',
+      choices:["(−∞, ∞)","[5/2, ∞)","(−∞, 5/2]","(−∞, 5/2)"], correct:2,
+      hint:"Inside of an even root must be ≥ 0. Solve 5 − 2x ≥ 0.",
+      solution:'5 − 2x ≥ 0 → x ≤ 5/2 → <span class="mq">(−∞, 5/2]</span>.'}
+  ]
+},
+{
+  id:"u5", num:"05", title:"Probability",
+  tag:"Two-way tables, conditional probability, unions, and tree diagrams.",
+  formulas:[
+    ["Conditional","P(A | B) = (A and B) / (total in B)","\u201cGiven B\u201d restricts the denominator to B's total."],
+    ["Tree diagram","multiply along a path, add across paths","Path probability = product of its branches."]
+  ],
+  worked:{
+    title:"Worked example — two-way table + conditional",
+    prob:"1000 dogs: 45% are large, 60% passed, and 40% are small AND passed. Find P(large | passed).",
+    steps:[
+      ['Totals: large = 450, small = 550, passed = 600, failed = 400.'],
+      ['Small & passed = 400, so large & passed = 600 − 400 = <span class="mq">200</span>.'],
+      ['\u201cGiven passed\u201d → denominator is the passed total, 600.'],
+      ['P(large | passed) = 200 / 600.','ans:200/600 = 1/3 ≈ 33%']
+    ]
+  },
+  questions:[
+    {type:"text", tag:"Q1", prompt:'From the dog table above, find <span class="mq">P(large | passed)</span>. (A fraction, decimal, or % all work.)',
+      accept:["200/600","1/3","2/6"], num:0.3333, tol:0.01, isPct:true,
+      hint:"Large-and-passed = 200, total passed = 600.",
+      solution:'200/600 = 1/3 ≈ <span class="mq">33%</span>.'},
+    {type:"text", tag:"Q2", prompt:'In a class of 27 students, 13 have a cat, 18 have a dog, and 2 have neither. Find <span class="mq">P(both a cat and a dog)</span>.',
+      accept:["6/27","2/9"], num:0.2222, tol:0.01, isPct:true,
+      hint:"25 have a cat OR dog. Use |C| + |D| − |both| = 25 to find the overlap, then divide by 27.",
+      solution:'25 have at least one. 13 + 18 − both = 25 → both = 6. P = <span class="mq">6/27 = 2/9</span>.'},
+    {type:"text", tag:"Q3", prompt:'Machines A, B, C make 60%, 30%, 10% of parts; their defect rates are 10%, 30%, 40%. Find <span class="mq">P(defective)</span> as a decimal.',
+      accept:["0.19","19/100",".19"], num:0.19, tol:0.005,
+      hint:"Multiply each share by its defect rate, then add the three paths.",
+      solution:'(0.6)(0.1)+(0.3)(0.3)+(0.1)(0.4) = 0.06+0.09+0.04 = <span class="mq">0.19</span>.'},
+    {type:"text", tag:"Q4", prompt:'Using the machines above, find <span class="mq">P(A | defective)</span> (round to 2 decimals).',
+      accept:["6/19","0.32","0.316",".32"], num:0.3158, tol:0.012,
+      hint:"P(A and defective) = 0.06. Divide by P(defective) = 0.19.",
+      solution:'0.06 / 0.19 = 6/19 ≈ <span class="mq">0.32</span>.'},
+    {type:"text", tag:"Q5", prompt:'<b>Titanic.</b> First class: 197 survived, 122 died (total 319). Find <span class="mq">P(died | first class)</span> as an unreduced fraction.',
+      accept:["122/319"], num:0.3824, tol:0.01,
+      hint:"Given first class, denominator is the first-class total, 319.",
+      solution:'Died and first class = 122, first-class total = 319 → <span class="mq">122/319</span>.'}
+  ]
+},
+{
+  id:"u6", num:"06", title:"Geometry & Similarity",
+  tag:"Geometric mean, similar triangles, and exact volume / surface area.",
+  formulas:[
+    ["Geometric mean altitude","h = (leg₁·leg₂)/hyp","Altitude to the hypotenuse of a right triangle."],
+    ["Cone surface area","SA = πr² + πrℓ , ℓ = √(r²+h²)","\u201cTotal\u201d includes the circular base."]
+  ],
+  worked:{
+    title:"Worked example — similar triangles",
+    prob:"In right △ABC, D is on AB and E is on CB with DE ∥ AC. AB = 15, BC = 12, EC = 7. Find BD.",
+    steps:[
+      ['DE ∥ AC makes △BDE ~ △BAC, so matching sides are proportional.'],
+      ['Find BE: <span class="mq">BE = BC − EC = 12 − 7 = 5</span>.'],
+      ['Set the proportion BD/BA = BE/BC: <span class="mq">BD/15 = 5/12</span>.'],
+      ['Cross-multiply: BD = (15·5)/12 = 75/12.','ans:BD = 25/4 = 6.25']
+    ]
+  },
+  questions:[
+    {type:"text", tag:"Q1", prompt:'A right triangle has legs <span class="mq">PQ = 5</span> and <span class="mq">QR = 12</span> (hypotenuse 13). Find the altitude <span class="mq">QS</span> to the hypotenuse (exact).',
+      accept:["60/13"], num:4.615, tol:0.02,
+      hint:"Altitude to hypotenuse = (leg·leg)/hypotenuse.",
+      solution:'QS = (5·12)/13 = <span class="mq">60/13</span> ≈ 4.62.'},
+    {type:"text", tag:"Q2", prompt:'From the worked example (AB=15, BC=12, EC=7, DE ∥ AC), find <span class="mq">BD</span>.',
+      accept:["25/4","75/12","6.25"], num:6.25, tol:0.02,
+      hint:"BE = 5, then BD/15 = 5/12.",
+      solution:'BD = (15·5)/12 = 75/12 = <span class="mq">25/4 = 6.25</span>.'},
+    {type:"text", tag:"Q3", prompt:'A cone is 4 in tall with volume <span class="mq">12π in³</span>. Find its total surface area in terms of π. (Type like <span class="mq">24pi</span>.)',
+      accept:["24π"],
+      hint:"Use V to get r (r=3), find slant ℓ=5, then SA = πr² + πrℓ.",
+      solution:'12π = ⅓πr²(4) → r² = 9 → r = 3. ℓ = √(3²+4²) = 5. SA = π(9) + π(3)(5) = 9π + 15π = <span class="mq">24π</span>.'},
+    {type:"text", tag:"Q4", prompt:'An equilateral triangle has perimeter 18 cm. Find its area (exact). (Type like <span class="mq">9sqrt3</span>.)',
+      accept:["9√3"], num:15.588, tol:0.05,
+      hint:"Side = 6. Area = (√3/4)s².",
+      solution:'s = 18/3 = 6. A = (√3/4)(36) = <span class="mq">9√3 cm²</span>.'},
+    {type:"text", tag:"Q5", prompt:'Right △ABC has legs <span class="mq">AB = 4</span>, <span class="mq">BC = 8</span>. A square shares the right-angle corner with sides on the legs. Find the square\'s <b>area</b> (exact fraction).',
+      accept:["64/9"], num:7.111, tol:0.03,
+      hint:"Square side s = (leg·leg)/(leg+leg). Then area = s².",
+      solution:'s = (4·8)/(4+8) = 32/12 = 8/3. Area = (8/3)² = <span class="mq">64/9</span>.'},
+    {type:"text", tag:"Q6", prompt:'A regular hexagonal prism has altitude 9 cm and base edge 6 cm. Find its <b>volume</b> (exact). (Type like <span class="mq">486sqrt3</span>.)',
+      accept:["486√3"], num:841.8, tol:0.6,
+      hint:"Hexagon area = (3√3/2)s², then multiply by the height.",
+      solution:'Base area = (3√3/2)(36) = 54√3. Volume = 54√3 · 9 = <span class="mq">486√3 cm³</span>.'}
+  ]
+},
+{
+  id:"u7", num:"07", title:"Right-Triangle Trigonometry",
+  tag:"The six ratios, finding sides and angles, and word problems.",
+  formulas:[
+    ["SOH-CAH-TOA","sin=opp/hyp · cos=adj/hyp · tan=opp/adj","Build from the reference angle θ."],
+    ["Find an angle","θ = tan⁻¹(opp/adj), etc.","Two sides known, angle unknown → inverse trig."]
+  ],
+  worked:{
+    title:"Worked example — six ratios from two legs",
+    prob:"A right triangle has legs 5 and 6, with θ opposite the leg of length 5. Write all six exact ratios.",
+    steps:[
+      ['Hypotenuse: <span class="mq">√(5² + 6²) = √61</span>. Opp = 5, Adj = 6.'],
+      ['sin θ = 5/√61, cos θ = 6/√61, tan θ = 5/6.'],
+      ['Reciprocals: csc θ = √61/5, sec θ = √61/6, cot θ = 6/5.','ans:tan θ = 5/6 , hyp = √61']
+    ]
+  },
+  questions:[
+    {type:"text", tag:"Q1", prompt:'Right triangle with legs 5 and 6. Find the <b>hypotenuse</b> (exact). (Type like <span class="mq">sqrt61</span>.)',
+      accept:["√61"], num:7.81, tol:0.03,
+      hint:"Pythagorean theorem: 5² + 6².",
+      solution:'√(25 + 36) = <span class="mq">√61</span> ≈ 7.81.'},
+    {type:"text", tag:"Q2", prompt:'For that triangle, with θ opposite the leg of 5, find <span class="mq">tan θ</span> (exact).',
+      accept:["5/6"], num:0.8333, tol:0.01,
+      hint:"tan = opposite / adjacent.",
+      solution:'tan θ = opp/adj = <span class="mq">5/6</span>.'},
+    {type:"text", tag:"Q3", prompt:'θ is acute with <span class="mq">sec θ = 13/4</span>. Find the missing (opposite) side in standard radical form. (Type like <span class="mq">3sqrt17</span>.)',
+      accept:["3√17","√153"], num:12.369, tol:0.05,
+      hint:"sec = hyp/adj → hyp 13, adj 4. Use Pythagoras for the opposite side.",
+      solution:'opp = √(13² − 4²) = √(169 − 16) = √153 = <span class="mq">3√17</span>.'},
+    {type:"text", tag:"Q4", prompt:'A cone\'s base circumference is <span class="mq">10π cm</span> and its volume is <span class="mq">75π cm³</span>. Find the angle between the slant height and the central axis (degrees, ≈ to 2 dp).',
+      accept:["29.05","29.06"], num:29.05, tol:0.25,
+      hint:"Circumference → r = 5. Volume → h = 9. The angle θ at the apex: tan θ = r/h.",
+      solution:'2πr = 10π → r = 5. 75π = ⅓π(25)h → h = 9. θ = tan⁻¹(5/9) ≈ <span class="mq">29.05°</span>.'},
+    {type:"text", tag:"Q5", prompt:'A right triangle has its right angle at B and acute angle <span class="mq">C = 22°</span>. Find <span class="mq">m∠A</span> (degrees).',
+      accept:["68","68°"], num:68, tol:0.5,
+      hint:"The two acute angles of a right triangle add to 90°.",
+      solution:'90 − 22 = <span class="mq">68°</span>.'}
+  ]
+}
+];
+
+/* =========================================================
+   ANSWER CHECKING
+   ========================================================= */
+function normalize(s){
+  return String(s).toLowerCase()
+    .replace(/\s+/g,'')
+    .replace(/\*/g,'')
+    .replace(/sqrt/g,'√')
+    .replace(/pi/g,'π')
+    .replace(/[()]/g,'')
+    .replace(/\^/g,'')
+    .replace(/–|—/g,'-');
+}
+function toNumber(s){
+  let t=String(s).toLowerCase().replace(/\s+/g,'');
+  if(/[√π]|sqrt|pi/.test(t)) return null;
+  let pct=false;
+  if(t.endsWith('%')){pct=true;t=t.slice(0,-1);}
+  let v=null;
+  if(/^-?\d*\.?\d+\/-?\d*\.?\d+$/.test(t)){
+    const [a,b]=t.split('/').map(Number); if(b) v=a/b;
+  } else if(/^-?\d*\.?\d+$/.test(t)){ v=parseFloat(t); }
+  if(v===null) return null;
+  if(pct) v=v/100;
+  return v;
+}
+function isCorrect(q, raw){
+  const userN = normalize(raw);
+  if(!userN) return false;
+  const list=(q.accept||[]).map(normalize);
+  if(list.includes(userN)) return true;
+  if(typeof q.num==='number'){
+    let v=toNumber(raw);
+    if(v!==null){
+      if(Math.abs(v-q.num)<=(q.tol||0.01)) return true;
+      // allow percent answers typed as whole numbers for probability Qs
+      if(q.isPct && Math.abs(v/100-q.num)<=(q.tol||0.01)) return true;
+    }
+  }
+  return false;
+}
+
+/* =========================================================
+   STATE / PROGRESS  (window.storage with in-memory fallback)
+   ========================================================= */
+const STORE_KEY='m2final:v1';
+let solved={};               // {questionKey:true}
+let responses={};            // {questionKey:{t:'text',v} | {t:'choice',ci}}
+let booting=false;
+const totalQ = UNITS.reduce((n,u)=>n+u.questions.length,0);
+
+// Use Claude's window.storage inside the in-app preview; fall back to
+// localStorage everywhere else (e.g. GitHub Pages) so progress persists.
+const hasClaudeStore = (typeof window!=='undefined' && window.storage && typeof window.storage.get==='function');
+async function loadState(){
+  try{
+    let raw=null;
+    if(hasClaudeStore){ const r=await window.storage.get(STORE_KEY); raw=r&&r.value; }
+    else{ raw=localStorage.getItem(STORE_KEY); }
+    if(raw){
+      const d=JSON.parse(raw)||{};
+      if(d && (d.solved || d.responses)){ solved=d.solved||{}; responses=d.responses||{}; }
+      else { solved=d; responses={}; }   // legacy save (flat solved map)
+    }
+  }catch(e){ solved={}; responses={}; }
+}
+async function saveState(){
+  if(booting) return;
+  try{
+    const v=JSON.stringify({solved, responses});
+    if(hasClaudeStore){ await window.storage.set(STORE_KEY, v); }
+    else{ localStorage.setItem(STORE_KEY, v); }
+  }catch(e){ /* in-memory only */ }
+}
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+function esc(){}
+function buildSteps(steps){
+  return steps.map(st=>{
+    const parts=Array.isArray(st)?st:[st];
+    let html='<li><div>';
+    parts.forEach(p=>{
+      if(typeof p==='string' && p.startsWith('ans:')){
+        html+='<div class="ans">→ '+p.slice(4)+'</div>';
+      } else { html+='<div>'+p+'</div>'; }
+    });
+    html+='</div></li>';
+    return html;
+  }).join('');
+}
+
+function renderUnit(u){
+  const f=u.formulas.map(fc=>`
+    <div class="fcard"><h4>${fc[0]}</h4><span class="eq">${fc[1]}</span><p>${fc[2]}</p></div>`).join('');
+
+  const w=`
+    <div class="worked">
+      <p class="wtitle">${u.worked.title}</p>
+      <p class="prob">${u.worked.prob}</p>
+      <ol class="steps">${buildSteps(u.worked.steps)}</ol>
+    </div>`;
+
+  const qs=u.questions.map((q,i)=>{
+    const key=u.id+'_'+i;
+    const done=!!solved[key];
+    let answerUI='';
+    if(q.type==='choice'){
+      answerUI='<div class="choices">'+q.choices.map((c,ci)=>`
+        <label class="choice" data-key="${key}" data-ci="${ci}">
+          <input type="radio" name="${key}">
+          <span class="lbl">${String.fromCharCode(65+ci)}</span>
+          <span>${c}</span>
+        </label>`).join('')+'</div>';
+    } else {
+      answerUI=`<div class="answerrow">
+        <input type="text" placeholder="Type your answer…" data-key="${key}" autocomplete="off" spellcheck="false">
+        <button class="checkbtn" data-check="${key}">Check</button>
+      </div>`;
+    }
+    return `
+    <div class="q ${done?'solved':''}" id="q_${key}">
+      <div class="qtop">
+        <span class="qtag">${q.tag}</span>
+        <p class="qprompt">${q.prompt}</p>
+      </div>
+      ${q.hint?`<p class="hintline">💡 ${q.hint}</p>`:''}
+      ${answerUI}
+      <div class="feedback" id="fb_${key}"></div>
+    </div>`;
+  }).join('');
+
+  return `
+    <section id="${u.id}">
+      <div class="sechead"><span class="num">${u.num}</span><h3>${u.title}</h3></div>
+      <p class="sectag">${u.tag}</p>
+      <div class="block-label">Formulas</div>
+      <div class="fgrid">${f}</div>
+      <div class="block-label">Worked example</div>
+      ${w}
+      <div class="block-label">Practice — checks your answer instantly</div>
+      ${qs}
+    </section>`;
+}
+
+document.getElementById('units').innerHTML = UNITS.map(renderUnit).join('');
+
+/* =========================================================
+   INTERACTION
+   ========================================================= */
+function qByKey(key){
+  const [uid,idx]=key.split('_');
+  const u=UNITS.find(x=>x.id===uid);
+  return {u, q:u.questions[+idx]};
+}
+function markSolved(key){
+  solved[key]=true;
+  document.getElementById('q_'+key)?.classList.add('solved');
+  saveState();
+  updateProgress();
+}
+function showFeedback(key, ok, q){
+  const fb=document.getElementById('fb_'+key);
+  fb.className='feedback show '+(ok?'ok':'no');
+  if(ok){
+    fb.innerHTML=`<div class="ftitle">✓ Correct</div><div>${q.solution}</div>`;
+  }else{
+    fb.innerHTML=`<div class="ftitle">Not yet — try again</div>
+      <div>Check the hint above, then give it another go.</div>
+      <button class="soltoggle">Show full solution</button>
+      <div class="solution">${q.solution}</div>`;
+    fb.querySelector('.soltoggle').addEventListener('click',e=>{
+      e.target.nextElementSibling.classList.toggle('show');
+      e.target.textContent = e.target.nextElementSibling.classList.contains('show')?'Hide solution':'Show full solution';
+    });
+  }
+}
+
+// text-answer checks
+function runText(key, opts={}){
+  const input=document.querySelector(`input[data-key="${key}"]`);
+  if(!input) return;
+  const {q}=qByKey(key);
+  const val=input.value;
+  const ok=isCorrect(q, val);
+  showFeedback(key, ok, q);
+  if(val.trim()!=='') responses[key]={t:'text', v:val};
+  if(ok){ markSolved(key); if(!opts.restore) input.blur(); }
+  saveState();
+}
+document.querySelectorAll('[data-check]').forEach(btn=>{
+  const key=btn.getAttribute('data-check');
+  const input=document.querySelector(`input[data-key="${key}"]`);
+  btn.addEventListener('click', ()=>runText(key));
+  input.addEventListener('keydown', e=>{ if(e.key==='Enter') runText(key); });
+});
+
+// choice checks
+function pickChoice(key, ci){
+  const {q}=qByKey(key);
+  const group=document.querySelectorAll(`.choice[data-key="${key}"]`);
+  if(!group.length) return;
+  group.forEach(g=>g.classList.remove('pick','correct','wrong'));
+  const ok = ci===q.correct;
+  if(group[ci]) group[ci].querySelector('input').checked=true;
+  if(ok){ group[ci].classList.add('correct'); markSolved(key); }
+  else{ group[ci].classList.add('wrong'); group[q.correct].classList.add('correct'); }
+  showFeedback(key, ok, q);
+  responses[key]={t:'choice', ci};
+  saveState();
+}
+document.querySelectorAll('.choice').forEach(ch=>{
+  ch.addEventListener('click', ()=>{
+    pickChoice(ch.getAttribute('data-key'), +ch.getAttribute('data-ci'));
+  });
+});
+
+/* =========================================================
+   PROGRESS RINGS / METER
+   ========================================================= */
+function updateProgress(){
+  let solvedCount=0;
+  UNITS.forEach(u=>{
+    let c=0;
+    u.questions.forEach((q,i)=>{ if(solved[u.id+'_'+i]) c++; });
+    solvedCount+=c;
+    const ring=document.querySelector(`.ring[data-ring="${u.id}"]`);
+    if(ring){
+      const p=Math.round(100*c/u.questions.length);
+      ring.style.setProperty('--p',p);
+      ring.classList.toggle('done', c===u.questions.length);
+    }
+  });
+  // formula dictionary ring: mark done once any 3 units fully complete (a soft "you've reviewed" cue) — keep simple: full when all solved
+  const refRing=document.querySelector('.ring[data-ring="ref"]');
+  if(refRing){ refRing.style.setProperty('--p', Math.round(100*solvedCount/totalQ)); }
+
+  const pct=Math.round(100*solvedCount/totalQ);
+  document.getElementById('pctBig').textContent=pct+'%';
+  document.getElementById('pctBar').style.width=pct+'%';
+  document.getElementById('tally').textContent=`${solvedCount} / ${totalQ} solved`;
+}
+
+/* =========================================================
+   MOBILE NAV + RESET + BOOT
+   ========================================================= */
+const sidebar=document.getElementById('sidebar');
+const scrim=document.getElementById('scrim');
+document.getElementById('menuBtn').addEventListener('click',()=>{sidebar.classList.add('open');scrim.classList.add('open');});
+scrim.addEventListener('click',()=>{sidebar.classList.remove('open');scrim.classList.remove('open');});
+document.querySelectorAll('.navlist a').forEach(a=>a.addEventListener('click',()=>{sidebar.classList.remove('open');scrim.classList.remove('open');}));
+
+document.getElementById('resetBtn').addEventListener('click',async()=>{
+  if(!confirm('Clear all your saved answers and progress?')) return;
+  solved={};
+  responses={};
+  try{ if(hasClaudeStore){ await window.storage.delete(STORE_KEY); } else { localStorage.removeItem(STORE_KEY); } }catch(e){}
+  // clear UI
+  document.querySelectorAll('.q').forEach(q=>q.classList.remove('solved'));
+  document.querySelectorAll('.feedback').forEach(f=>{f.className='feedback';f.innerHTML='';});
+  document.querySelectorAll('.choice').forEach(c=>{c.classList.remove('pick','correct','wrong');c.querySelector('input').checked=false;});
+  document.querySelectorAll('input[type=text][data-key]').forEach(i=>i.value='');
+  updateProgress();
+});
+
+(async function boot(){
+  await loadState();
+  booting=true;
+  UNITS.forEach(u=>u.questions.forEach((q,i)=>{
+    const key=u.id+'_'+i;
+    const r=responses[key];
+    if(r && r.t==='text'){
+      const input=document.querySelector(`input[data-key="${key}"]`);
+      if(input){ input.value=r.v; runText(key,{restore:true}); }
+    } else if(r && r.t==='choice'){
+      pickChoice(key, r.ci);
+    } else if(solved[key]){
+      document.getElementById('q_'+key)?.classList.add('solved');
+    }
+  }));
+  booting=false;
+  await saveState();
+  updateProgress();
+})();
+</script>
+</body>
+</html>
