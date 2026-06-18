@@ -35,12 +35,16 @@
   }
   .mono{font-family:"JetBrains Mono",monospace;}
 
-  /* ---------- Layout ---------- */
-  .shell{display:grid;grid-template-columns:268px 1fr;min-height:100vh;min-height:100dvh;}
+  /* ---------- Layout (mobile-first) ---------- */
+  .shell{display:grid;grid-template-columns:1fr;min-height:100vh;min-height:100dvh;}
   .sidebar{
-    position:sticky;top:0;height:100vh;height:100dvh;overflow-y:auto;background:#ffffff;
-    color:var(--ink);padding:26px 18px 40px;border-right:1px solid var(--line);
+    position:fixed;left:0;top:0;height:100vh;height:100dvh;width:280px;z-index:50;
+    transform:translateX(-100%);transition:transform .25s ease;box-shadow:0 0 40px rgba(0,0,0,.3);
+    overflow-y:auto;background:#ffffff;color:var(--ink);padding:26px 18px 40px;border-right:1px solid var(--line);
   }
+  .sidebar.open{transform:none;}
+  .scrim{position:fixed;inset:0;background:rgba(20,18,40,.5);z-index:40;display:none;}
+  .scrim.open{display:block;}
   .brand{display:flex;flex-direction:column;gap:2px;margin-bottom:22px;}
   .brand .kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet);font-weight:700;}
   .brand h1{font-family:"Space Grotesk";font-weight:700;font-size:21px;margin:2px 0 0;line-height:1.15;letter-spacing:-.01em;color:var(--ink);}
@@ -75,13 +79,14 @@
   main{padding:0 0 90px;min-width:0;}
   .topbar{
     position:sticky;top:0;z-index:20;background:rgba(244,247,253,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);padding:13px 40px;display:flex;align-items:center;gap:16px;
+    border-bottom:1px solid var(--line);padding:13px 20px;display:flex;align-items:center;gap:16px;
   }
   .topbar .tt{font-family:"Space Grotesk";font-weight:600;font-size:14px;letter-spacing:-.01em;}
   .topbar .tally{margin-left:auto;font-size:12.5px;color:var(--muted);font-family:"JetBrains Mono";}
-  .topbar .menu-btn{display:none;}
+  .topbar .menu-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;
+    border:1px solid var(--line);background:var(--panel);border-radius:9px;cursor:pointer;font-size:18px;flex:none;}
 
-  .wrap{max-width:880px;margin:0 auto;padding:0 40px;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px;}
 
   /* ---------- Hero ---------- */
   .hero{padding:54px 0 30px;border-bottom:1px solid var(--line);}
@@ -113,7 +118,7 @@
   .fcard .eq{font-family:"JetBrains Mono";font-size:14.5px;background:var(--violet-wash);color:var(--violet-deep);
     display:inline-block;padding:5px 11px;border-radius:8px;margin:3px 0 7px;font-weight:500;max-width:100%;overflow-wrap:anywhere;}
   .fcard p{margin:0;font-size:13.5px;color:var(--ink-soft);}
-  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .fgrid{display:grid;grid-template-columns:1fr;gap:12px;}
 
   /* worked example */
   .worked{background:#fffdf8;border:1px solid #ecdfc4;border-left:4px solid var(--amber);
@@ -196,33 +201,26 @@
 
   footer{max-width:880px;margin:0 auto;padding:40px;color:var(--muted);font-size:12.5px;text-align:center;}
 
-  @media (max-width:860px){
-    .shell{grid-template-columns:1fr;}
-    .sidebar{position:fixed;left:0;top:0;width:280px;z-index:50;transform:translateX(-100%);transition:.25s;box-shadow:0 0 40px rgba(0,0,0,.3);}
-    .sidebar.open{transform:none;}
-    .topbar .menu-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;
-      border:1px solid var(--line);background:var(--panel);border-radius:9px;cursor:pointer;font-size:18px;}
-    .wrap,.topbar{padding-left:20px;padding-right:20px;}
-    .fgrid{grid-template-columns:1fr;}
-    .scrim{position:fixed;inset:0;background:rgba(20,18,40,.5);z-index:40;display:none;}
-    .scrim.open{display:block;}
+  /* Desktop sidebar layout ONLY on a real (mouse) pointer with room.
+     Touch devices stay in the stacked layout no matter what width they claim. */
+  @media (min-width:861px) and (pointer:fine){
+    .shell{grid-template-columns:268px 1fr;}
+    .sidebar{position:sticky;transform:none;width:auto;z-index:auto;box-shadow:none;transition:none;}
+    .scrim{display:none !important;}
+    .topbar .menu-btn{display:none;}
+    .topbar{padding:13px 40px;}
+    .wrap{padding:0 40px;}
+    .fgrid{grid-template-columns:1fr 1fr;}
   }
-
-  @media (max-width:480px){
-    .wrap,.topbar{padding-left:16px;padding-right:16px;}
-    section{padding:34px 0;}
-    .hero{padding:38px 0 24px;}
-    .sechead h3{font-size:21px;}
-    .sechead{gap:10px;}
-    .q,.fcard{padding:15px 16px;}
-    .worked{padding:16px 16px;}
-    .qprompt{font-size:14px;}
-    .answerrow input[type=text]{min-width:0;width:100%;}
-    .checkbtn{flex:1;}
-    .figure{padding:8px;}
-    .figure svg{max-width:100%;}
-    .block-label{margin:24px 0 10px;}
-  }
+  /* JS-forced stacked layout (belt & suspenders for touch devices that
+     mis-report pointer/width). Class wins over the desktop media query. */
+  html.is-narrow .shell{grid-template-columns:1fr;}
+  html.is-narrow .sidebar{position:fixed;left:0;top:0;width:280px;z-index:50;transform:translateX(-100%);box-shadow:0 0 40px rgba(0,0,0,.3);transition:transform .25s ease;}
+  html.is-narrow .sidebar.open{transform:none;}
+  html.is-narrow .scrim{display:none;}
+  html.is-narrow .scrim.open{display:block;}
+  html.is-narrow .topbar .menu-btn{display:inline-flex;}
+  html.is-narrow .fgrid{grid-template-columns:1fr;}
   /* Fallback for in-app / file viewers that ignore the mobile viewport meta:
      force the stacked (mobile) layout based on the REAL device width. */
   html.is-narrow .shell{grid-template-columns:1fr;}
@@ -242,16 +240,19 @@
 <script>
 (function(){
   function setNarrow(){
-    var iw = window.innerWidth || 9999;
-    var sw = (window.screen && screen.width) || 9999;
-    var w = Math.min(iw, sw);            // trust whichever is smaller (real device)
+    var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    var vv = (window.visualViewport && window.visualViewport.width) || 9999;
+    var w = Math.min(window.innerWidth || 9999, (window.screen && screen.width) || 9999, vv);
     var h = document.documentElement;
-    h.classList.toggle('is-narrow', w <= 860);
+    // Stack the layout on real phones/tablets OR genuinely narrow windows,
+    // even if the viewer mis-reports a wide width.
+    h.classList.toggle('is-narrow', w <= 860 || (isTouch && w <= 1100));
     h.classList.toggle('is-xnarrow', w <= 480);
   }
   setNarrow();
   window.addEventListener('resize', setNarrow);
   window.addEventListener('orientationchange', setNarrow);
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', setNarrow);
 })();
 </script>
 </head>
